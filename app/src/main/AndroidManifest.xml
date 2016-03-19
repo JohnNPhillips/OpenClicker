@@ -15,6 +15,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".student.StudentLoginActivity" />
+        <activity android:name=".student.StudentClassListActivity" />
+        <activity android:name=".student.WaitForQuestionActivity" />
+        <activity android:name=".student.AnswerQuestionActivity" />
+        <activity android:name=".student.EnrollActivity"></activity>
     </application>
 
 </manifest>
