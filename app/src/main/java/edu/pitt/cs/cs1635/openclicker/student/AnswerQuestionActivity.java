@@ -1,10 +1,13 @@
 package edu.pitt.cs.cs1635.openclicker.student;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import edu.pitt.cs.cs1635.openclicker.R;
 
@@ -28,14 +31,28 @@ public class AnswerQuestionActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     for (Button b : answers) {
-                        //Zb.setEnabled(true);
+                        //b.setEnabled(true);
                         b.setBackgroundResource(android.R.drawable.btn_default);
                     }
 
                     //ans_button.setEnabled(false);
-                    ans_button.setBackgroundColor(Color.argb(0xFF, 0x92,0xd2, 0x95)); // pale greenish
+                    ans_button.setBackgroundColor(Color.argb(0xFF, 0x92, 0xd2, 0x95)); // pale greenish
                 }
             });
         }
+
+        // Countdown  timer
+        final TextView timeRemaining = (TextView)findViewById(R.id.answer_time_remaining);
+        new CountDownTimer(10000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                timeRemaining.setText("Time Remaining: 00:" + String.format("%02d", millisUntilFinished / 1000));
+            }
+
+            public void onFinish() {
+                Intent intent = new Intent(AnswerQuestionActivity.this, WaitForQuestionActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        }.start();
     }
 }
