@@ -19,7 +19,8 @@
         <activity android:name=".student.StudentClassListActivity" />
         <activity android:name=".student.WaitForQuestionActivity" />
         <activity android:name=".student.AnswerQuestionActivity" />
-        <activity android:name=".student.EnrollActivity"></activity>
+        <activity android:name=".student.EnrollActivity" />
+        <activity android:name=".teacher.TeacherLoginActivity"></activity>
     </application>
 
 </manifest>

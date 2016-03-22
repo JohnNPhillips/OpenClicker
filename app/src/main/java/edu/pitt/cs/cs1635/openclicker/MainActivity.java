@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import edu.pitt.cs.cs1635.openclicker.student.StudentLoginActivity;
+import edu.pitt.cs.cs1635.openclicker.teacher.TeacherLoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
         teacher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // To add later
+                Intent intent = new Intent(MainActivity.this, TeacherLoginActivity.class);
+                startActivity(intent);
             }
         });
     }
