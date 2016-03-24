@@ -54,7 +54,8 @@ public class TeacherClassesAdapter extends BaseAdapter implements ListAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Open teacher class activity
+                Intent intent = new Intent(context, ClassInfoActivity.class);
+                context.startActivity(intent);
             }
         });
 

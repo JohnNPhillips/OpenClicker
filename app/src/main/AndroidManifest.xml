@@ -22,7 +22,8 @@
         <activity android:name=".student.EnrollActivity" />
         <activity android:name=".teacher.TeacherLoginActivity" />
         <activity android:name=".teacher.TeacherClassListActivity" />
-        <activity android:name=".teacher.CreateClassActivity"></activity>
+        <activity android:name=".teacher.CreateClassActivity" />
+        <activity android:name=".teacher.ClassInfoActivity"></activity>
     </application>
 
 </manifest>
