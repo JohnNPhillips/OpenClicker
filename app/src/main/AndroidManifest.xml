@@ -15,17 +15,39 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".student.StudentLoginActivity" />
-        <activity android:name=".student.StudentClassListActivity" />
-        <activity android:name=".student.WaitForQuestionActivity" />
-        <activity android:name=".student.AnswerQuestionActivity" />
-        <activity android:name=".student.EnrollActivity" />
-        <activity android:name=".teacher.TeacherLoginActivity" />
-        <activity android:name=".teacher.TeacherClassListActivity" />
-        <activity android:name=".teacher.CreateClassActivity" />
-        <activity android:name=".teacher.ClassInfoActivity" />
-        <activity android:name=".teacher.CreateQuestionActivity" />
-        <activity android:name=".teacher.AskQuestion"></activity>
+        <activity
+            android:name=".student.StudentLoginActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".student.StudentClassListActivity"
+            android:parentActivityName=".student.StudentLoginActivity" />
+        <activity
+            android:name=".student.WaitForQuestionActivity"
+            android:parentActivityName=".student.StudentClassListActivity" />
+        <activity
+            android:name=".student.AnswerQuestionActivity"
+            android:parentActivityName=".student.StudentClassListActivity" />
+        <activity
+            android:name=".student.EnrollActivity"
+            android:parentActivityName=".student.StudentClassListActivity" />
+        <activity
+            android:name=".teacher.TeacherLoginActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".teacher.TeacherClassListActivity"
+            android:parentActivityName=".teacher.TeacherLoginActivity" />
+        <activity
+            android:name=".teacher.CreateClassActivity"
+            android:parentActivityName=".teacher.TeacherClassListActivity" />
+        <activity
+            android:name=".teacher.ClassInfoActivity"
+            android:parentActivityName=".teacher.TeacherClassListActivity" />
+        <activity
+            android:name=".teacher.CreateQuestionActivity"
+            android:parentActivityName=".teacher.ClassInfoActivity" />
+        <activity
+            android:name=".teacher.AskQuestion"
+            android:parentActivityName=".teacher.ClassInfoActivity" />
     </application>
 
 </manifest>
