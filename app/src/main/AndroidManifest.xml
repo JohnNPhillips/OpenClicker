@@ -46,7 +46,7 @@
             android:name=".teacher.CreateQuestionActivity"
             android:parentActivityName=".teacher.ClassInfoActivity" />
         <activity
-            android:name=".teacher.AskQuestion"
+            android:name=".teacher.AskQuestionActivity"
             android:parentActivityName=".teacher.ClassInfoActivity" />
     </application>
 

@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import edu.pitt.cs.cs1635.openclicker.R;
 
-public class AskQuestion extends AppCompatActivity {
+public class AskQuestionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
