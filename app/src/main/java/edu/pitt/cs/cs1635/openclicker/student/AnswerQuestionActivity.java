@@ -27,16 +27,17 @@ public class AnswerQuestionActivity extends AppCompatActivity {
 
         for (int i = 0; i < answers.length; i++) {
             final Button ans_button = answers[i];
+            ans_button.setFocusableInTouchMode(true);
             ans_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     for (Button b : answers) {
                         //b.setEnabled(true);
-                        b.setBackgroundResource(android.R.drawable.btn_default);
+                        b.setBackgroundResource(R.drawable.button);
                     }
 
                     //ans_button.setEnabled(false);
-                    ans_button.setBackgroundColor(Color.argb(0xFF, 0x92, 0xd2, 0x95)); // pale greenish
+                    ans_button.requestFocus();
                 }
             });
         }

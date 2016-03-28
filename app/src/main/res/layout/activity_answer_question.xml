@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/colorSecondaryLight"
     tools:context=".student.AnswerQuestionActivity">
 
     <TextView
@@ -20,6 +21,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
+        style="@style/button"
         android:id="@+id/answer_a"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,6 +31,7 @@
         android:text="40" />
 
     <Button
+        style="@style/button"
         android:id="@+id/answer_b"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,6 +41,7 @@
         android:text="45" />
 
     <Button
+        style="@style/button"
         android:id="@+id/answer_c"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,6 +51,7 @@
         android:text="48" />
 
     <Button
+        style="@style/button"
         android:id="@+id/answer_d"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,6 +61,7 @@
         android:text="50" />
 
     <Button
+        style="@style/button"
         android:id="@+id/answer_e"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
