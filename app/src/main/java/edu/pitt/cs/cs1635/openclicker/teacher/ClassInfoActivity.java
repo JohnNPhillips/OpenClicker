@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 
+import edu.pitt.cs.cs1635.openclicker.Globals;
 import edu.pitt.cs.cs1635.openclicker.R;
 
 public class ClassInfoActivity extends AppCompatActivity {
@@ -23,5 +25,9 @@ public class ClassInfoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        QuestionsAdapter adapter = new QuestionsAdapter(Globals.classQuestions.get("CS 4321"), this);
+        ListView question_list = (ListView) findViewById(R.id.teacher_questions_list);
+        question_list.setAdapter(adapter);
     }
 }

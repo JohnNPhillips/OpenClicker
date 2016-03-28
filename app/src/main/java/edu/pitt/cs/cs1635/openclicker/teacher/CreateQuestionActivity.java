@@ -19,7 +19,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
         askQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CreateQuestionActivity.this, AskQuestion.class);
+                Intent intent = new Intent(CreateQuestionActivity.this, AskQuestionActivity.class);
                 startActivity(intent);
             }
         });
