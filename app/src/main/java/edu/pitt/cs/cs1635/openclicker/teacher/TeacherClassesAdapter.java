@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import edu.pitt.cs.cs1635.openclicker.Globals;
 import edu.pitt.cs.cs1635.openclicker.R;
 
 public class TeacherClassesAdapter extends BaseAdapter implements ListAdapter {
@@ -54,6 +55,7 @@ public class TeacherClassesAdapter extends BaseAdapter implements ListAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Globals.currentTeacherClass = list.get(position);
                 Intent intent = new Intent(context, ClassInfoActivity.class);
                 context.startActivity(intent);
             }

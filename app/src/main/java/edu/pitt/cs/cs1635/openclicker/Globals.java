@@ -10,8 +10,9 @@ public class Globals {
 
     public static HashMap<String, List<Question>> classQuestions = new HashMap<>();
 
-    static
-    {
+    public static String currentTeacherClass = null;
+
+    static {
         studentClassList.add("CS 1234");
         studentClassList.add("CS 4567");
 
@@ -22,5 +23,24 @@ public class Globals {
         List<Question> cs4321_questions = new ArrayList<>();
         cs4321_questions.add(q);
         classQuestions.put("CS 4321", cs4321_questions);
+    }
+
+    public static void addQuestionToCurrentClass(Question q) {
+        List<Question> classQs = classQuestions.get(currentTeacherClass);
+        if (classQs == null) {
+            classQs = new ArrayList<>();
+        }
+
+        classQs.add(q);
+    }
+
+    public static List<Question> getQuestionListForTeacher() {
+        List<Question> classQs = classQuestions.get(currentTeacherClass);
+        if (classQs == null) {
+            classQs = new ArrayList<>();
+            classQuestions.put(currentTeacherClass, classQs);
+        }
+
+        return classQs;
     }
 }
