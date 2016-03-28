@@ -26,12 +26,18 @@
             android:text="Q: How many states are there in the US?"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <TextView
-            android:id="@+id/textView11"
+        <ImageView
+            android:id="@+id/imageView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="-- Current Results Here --"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:src="@drawable/graph0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Time Remaining: ##:##"
+            android:id="@+id/time_remaining"/>
 
         <Button
             style="@style/button"
