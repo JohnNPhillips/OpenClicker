@@ -13,16 +13,25 @@ public class Globals {
     public static String currentTeacherClass = null;
 
     static {
-        studentClassList.add("CS 1234");
-        studentClassList.add("CS 4567");
+        studentClassList.add("CS 1632");
+        studentClassList.add("CS 1550");
 
-        teacherClassList.add("CS 4321");
-        teacherClassList.add("CS 8765");
+        teacherClassList.add("HIST 1234");
+        teacherClassList.add("HIST 2300");
 
-        Question q = new Question("How many states are there in the US?", "40", "45", "48", "50", "52", 3);
-        List<Question> cs4321_questions = new ArrayList<>();
-        cs4321_questions.add(q);
-        classQuestions.put("CS 4321", cs4321_questions);
+        List<Question> hist1234_questions = new ArrayList<>();
+        Question q1 = new Question("What year did the civil war start?", "", "", "", "", "", 0);
+        Question q2 = new Question("Who was president in 1860?", "", "", "", "", "", 0);
+        Question q3 = new Question("Where was the last battle in the civil war?", "", "", "", "", "", 0);
+        hist1234_questions.add(q1);
+        hist1234_questions.add(q2);
+        hist1234_questions.add(q3);
+        classQuestions.put("HIST 1234", hist1234_questions);
+
+        Question statesQ = new Question("How many states are there in the US?", "40", "45", "48", "50", "52", 3);
+        List<Question> hist101qs = new ArrayList<>();
+        hist101qs.add(statesQ);
+        classQuestions.put("CS 4321", hist101qs);
     }
 
     public static void addQuestionToCurrentClass(Question q) {

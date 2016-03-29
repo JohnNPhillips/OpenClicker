@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import edu.pitt.cs.cs1635.openclicker.Globals;
 import edu.pitt.cs.cs1635.openclicker.R;
@@ -29,5 +30,8 @@ public class ClassInfoActivity extends AppCompatActivity {
         QuestionsAdapter adapter = new QuestionsAdapter(Globals.getQuestionListForTeacher(), this);
         ListView question_list = (ListView) findViewById(R.id.teacher_questions_list);
         question_list.setAdapter(adapter);
+
+        TextView classCode = (TextView) findViewById(R.id.teacher_class_code);
+        classCode.setText("Class Code: " + ((Globals.currentTeacherClass.hashCode() % 900000) + 100000));
     }
 }
