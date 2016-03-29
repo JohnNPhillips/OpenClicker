@@ -37,7 +37,6 @@ public class AskQuestionActivity extends AppCompatActivity {
         currentSlide = 1;
         image.setImageResource(images[0]);
 
-
         final TextView timeRemaining = (TextView)findViewById(R.id.time_remaining);
         new CountDownTimer(8000, 1000) {
             public void onTick(long millisUntilFinished) {

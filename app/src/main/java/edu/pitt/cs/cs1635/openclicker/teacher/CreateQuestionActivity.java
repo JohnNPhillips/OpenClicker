@@ -8,13 +8,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
-import java.util.List;
-
 import edu.pitt.cs.cs1635.openclicker.Globals;
 import edu.pitt.cs.cs1635.openclicker.Question;
 import edu.pitt.cs.cs1635.openclicker.R;
 
 public class CreateQuestionActivity extends AppCompatActivity {
+
+    private RadioButton[] radios = new RadioButton[5];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +25,13 @@ public class CreateQuestionActivity extends AppCompatActivity {
         askQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                saveQuestion();
+
                 Intent intent = new Intent(CreateQuestionActivity.this, AskQuestionActivity.class);
                 startActivity(intent);
             }
         });
 
-        final RadioButton[] radios = new RadioButton[5];
         radios[0] = (RadioButton) findViewById(R.id.question_a_correct);
         radios[1] = (RadioButton) findViewById(R.id.question_b_correct);
         radios[2] = (RadioButton) findViewById(R.id.question_c_correct);
@@ -53,30 +54,35 @@ public class CreateQuestionActivity extends AppCompatActivity {
         }
 
         // Save question functionality
-        Button saveQuestion = (Button) findViewById(R.id.teacher_save_question);
+        final Button saveQuestion = (Button) findViewById(R.id.teacher_save_question);
         saveQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String questionTitle = ((EditText) findViewById(R.id.teacher_create_question_title)).getText().toString();
-                String ansA = ((EditText) findViewById(R.id.question_a_text)).getText().toString();
-                String ansB = ((EditText) findViewById(R.id.question_b_text)).getText().toString();
-                String ansC = ((EditText) findViewById(R.id.question_c_text)).getText().toString();
-                String ansD = ((EditText) findViewById(R.id.question_d_text)).getText().toString();
-                String ansE = ((EditText) findViewById(R.id.question_e_text)).getText().toString();
-
-                int correct_ans = 0;
-                for (int i = 0; i < radios.length; i++) {
-                    if (radios[i].isChecked()) {
-                        correct_ans = i;
-                    }
-                }
-
-                Question newQ = new Question(questionTitle, ansA, ansB, ansC, ansD, ansE, correct_ans);
-                Globals.addQuestionToCurrentClass(newQ);
+                saveQuestion();
 
                 Intent intent = new Intent(CreateQuestionActivity.this, ClassInfoActivity.class);
                 startActivity(intent);
             }
         });
+    }
+
+    private void saveQuestion() {
+        String questionTitle = ((EditText) findViewById(R.id.teacher_create_question_title)).getText().toString();
+        String ansA = ((EditText) findViewById(R.id.question_a_text)).getText().toString();
+        String ansB = ((EditText) findViewById(R.id.question_b_text)).getText().toString();
+        String ansC = ((EditText) findViewById(R.id.question_c_text)).getText().toString();
+        String ansD = ((EditText) findViewById(R.id.question_d_text)).getText().toString();
+        String ansE = ((EditText) findViewById(R.id.question_e_text)).getText().toString();
+
+        int correct_ans = 0;
+        for (int i = 0; i < radios.length; i++) {
+            if (radios[i].isChecked()) {
+                correct_ans = i;
+            }
+        }
+
+        Question newQ = new Question(questionTitle, ansA, ansB, ansC, ansD, ansE, correct_ans);
+        Globals.addQuestionToCurrentClass(newQ);
+
     }
 }
