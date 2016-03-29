@@ -39,12 +39,5 @@
             android:text="Time Remaining: ##:##"
             android:id="@+id/time_remaining"/>
 
-        <Button
-            style="@style/button"
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ask Another Question" />
-
     </LinearLayout>
 </RelativeLayout>
