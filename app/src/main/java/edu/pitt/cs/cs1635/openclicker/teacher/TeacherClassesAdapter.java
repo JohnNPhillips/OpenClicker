@@ -1,6 +1,8 @@
 package edu.pitt.cs.cs1635.openclicker.teacher;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,8 +68,17 @@ public class TeacherClassesAdapter extends BaseAdapter implements ListAdapter {
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                list.remove(position); //or some other task
-                notifyDataSetChanged();
+                new AlertDialog.Builder(context)
+                        .setTitle("Delete Class")
+                        .setMessage("Are you sure you want to remove this class? It will remove all of the students as well.")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                list.remove(position);
+                                notifyDataSetChanged();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, null).show();
             }
         });
 
