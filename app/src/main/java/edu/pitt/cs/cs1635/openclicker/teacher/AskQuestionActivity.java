@@ -46,7 +46,7 @@ public class AskQuestionActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
-                Intent intent = new Intent(AskQuestion.this, ClassInfoActivity.class);
+                Intent intent = new Intent(AskQuestionActivity.this, ClassInfoActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

@@ -1,6 +1,7 @@
 package edu.pitt.cs.cs1635.openclicker.teacher;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,13 +59,12 @@ public class QuestionsAdapter extends BaseAdapter implements ListAdapter {
             }
         });
 
-        // Handle question deletion
-        Button deleteBtn = (Button) view.findViewById(R.id.list_question_delete);
-        deleteBtn.setOnClickListener(new View.OnClickListener() {
+        Button askQ = (Button) view.findViewById(R.id.teacher_ask_question);
+        askQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                list.remove(position); //or some other task
-                notifyDataSetChanged();
+                Intent intent = new Intent(context, AskQuestionActivity.class);
+                context.startActivity(intent);
             }
         });
 

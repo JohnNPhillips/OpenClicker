@@ -11,17 +11,19 @@
         android:layout_centerVertical="true"
         android:paddingLeft="8dp"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_toLeftOf="@+id/teacher_ask_question"
+        android:layout_toStartOf="@+id/teacher_ask_question" />
 
     <Button
-        android:id="@+id/list_question_delete"
+        android:id="@+id/teacher_ask_question"
         style="@style/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="5dp"
-        android:text="Delete" />
+        android:text="Ask" />
 
 </RelativeLayout>
 
