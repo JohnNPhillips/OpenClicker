@@ -23,12 +23,13 @@ public class CreateClassActivity extends AppCompatActivity {
         createClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String code = className.getText().toString().trim();
-                if (!code.isEmpty()) {
-                    Globals.teacherClassList.add(code);
+                String name = className.getText().toString().trim();
+                if (!name.isEmpty()) {
+                    Globals.teacherClassList.add(name);
                 }
 
                 Intent intent = new Intent(CreateClassActivity.this, TeacherClassListActivity.class);
+                intent.putExtra(TeacherClassListActivity.NEW_CLASS_CODE, Globals.getClassCode(name));
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

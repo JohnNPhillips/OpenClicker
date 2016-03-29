@@ -34,6 +34,10 @@ public class Globals {
         classQuestions.put("CS 4321", hist101qs);
     }
 
+    public static int getClassCode(String className) {
+        return (className.hashCode() % 900000) + 100000;
+    }
+
     public static void addQuestionToCurrentClass(Question q) {
         List<Question> classQs = classQuestions.get(currentTeacherClass);
         if (classQs == null) {

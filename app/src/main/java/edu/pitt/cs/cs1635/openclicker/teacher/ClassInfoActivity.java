@@ -32,6 +32,6 @@ public class ClassInfoActivity extends AppCompatActivity {
         question_list.setAdapter(adapter);
 
         TextView classCode = (TextView) findViewById(R.id.teacher_class_code);
-        classCode.setText("Class Code: " + ((Globals.currentTeacherClass.hashCode() % 900000) + 100000));
+        classCode.setText("Class Code: " + Globals.getClassCode(Globals.currentTeacherClass));
     }
 }

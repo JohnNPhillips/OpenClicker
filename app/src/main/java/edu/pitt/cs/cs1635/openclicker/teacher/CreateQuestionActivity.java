@@ -83,6 +83,5 @@ public class CreateQuestionActivity extends AppCompatActivity {
 
         Question newQ = new Question(questionTitle, ansA, ansB, ansC, ansD, ansE, correct_ans);
         Globals.addQuestionToCurrentClass(newQ);
-
     }
 }
