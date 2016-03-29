@@ -23,7 +23,7 @@ public class TeacherClassListActivity extends AppCompatActivity {
 
         // Pop up class code for newly created class
         if (getIntent().hasExtra(NEW_CLASS_CODE)) {
-            int code = getIntent().getIntExtra(NEW_CLASS_CODE, 0);
+            String code = getIntent().getStringExtra(NEW_CLASS_CODE);
             new AlertDialog.Builder(this)
                     .setTitle("Class Code")
                     .setMessage("Class successfully created. The class code (" + code + ") should  be distributed to your students so they can enroll in the class.")
