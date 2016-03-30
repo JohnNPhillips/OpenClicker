@@ -16,7 +16,7 @@ public class AskQuestionActivity extends AppCompatActivity {
 
     ImageView image;
     TextView question;
-    int currentSlide;
+    int currentSlide, seconds;
     int[] images;
 
     @Override
@@ -27,6 +27,7 @@ public class AskQuestionActivity extends AppCompatActivity {
         question = (TextView) findViewById(R.id.questionTLabel);
 
         question.setText(getIntent().getExtras().getString("Question"));
+        seconds = getIntent().getExtras().getInt("Time");
 
         images = new int[8];
         images[0] = R.drawable.graph0;
@@ -42,9 +43,9 @@ public class AskQuestionActivity extends AppCompatActivity {
         image.setImageResource(images[0]);
 
         final TextView timeRemaining = (TextView)findViewById(R.id.time_remaining);
-        new CountDownTimer(8000, 1000) {
+        new CountDownTimer(seconds * 1000, 1000) {
             public void onTick(long millisUntilFinished) {
-                if(millisUntilFinished < 1000f * (8 - currentSlide)) image.setImageResource(images[currentSlide++]);
+                if(millisUntilFinished < 1000f * (seconds - currentSlide)) image.setImageResource(images[currentSlide++]);
                 timeRemaining.setText("Time Remaining: 00:" + String.format("%02d", millisUntilFinished / 1000));
             }
 

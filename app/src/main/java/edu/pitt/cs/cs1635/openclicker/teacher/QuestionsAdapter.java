@@ -65,6 +65,7 @@ public class QuestionsAdapter extends BaseAdapter implements ListAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(context, AskQuestionActivity.class);
                 intent.putExtra("Question", list.get(position).text);
+                intent.putExtra("Time", list.get(position).seconds);
                 context.startActivity(intent);
             }
         });
