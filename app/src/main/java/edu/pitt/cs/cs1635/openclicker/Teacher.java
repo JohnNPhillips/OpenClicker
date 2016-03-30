@@ -6,10 +6,10 @@ import java.util.ArrayList;
  * Created by lukekljucaric on 3/30/16.
  */
 public class Teacher {
-    private  int id;
+    private String id;
     private ArrayList<ClassObject> classes;
 
-    public Teacher(int n)
+    public Teacher(String n)
     {
         id = n;
         classes = new ArrayList<ClassObject>();
@@ -26,6 +26,11 @@ public class Teacher {
         }
 
         return null;
+    }
+
+    public String getId()
+    {
+        return id;
     }
 
     public void addClass(ClassObject c)

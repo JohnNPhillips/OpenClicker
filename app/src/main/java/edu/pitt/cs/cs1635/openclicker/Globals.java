@@ -6,15 +6,16 @@ import java.util.List;
 
 public class Globals {
     public static ArrayList<String> studentClassList = new ArrayList<>();
+    private static ArrayList<Teacher> teachers = new ArrayList<Teacher>();
     //public static ArrayList<String> teacherClassList = new ArrayList<>();
 
-    public static HashMap<String, List<Question>> classQuestions = new HashMap<>();
+    private static HashMap<String, List<Question>> classQuestions = new HashMap<>();
 
-    public static String currentTeacherClass = null;
+    private static String currentTeacherClass = null, activeTeacher = null, tempClass = null;
 
-    public static Teacher teacherTest = new Teacher(100);
-    public static ClassObject classExample = new ClassObject("HIST 1234");
-    public static ClassObject classExample2 = new ClassObject("HIST 2300");
+    private static Teacher teacherTest = new Teacher("100");
+    private static ClassObject classExample = new ClassObject("HIST 1234");
+    private static ClassObject classExample2 = new ClassObject("HIST 2300");
 
     static {
         studentClassList.add("CS 1632");
@@ -34,6 +35,7 @@ public class Globals {
         classExample.addQuestion(q2);
         classExample.addQuestion(q3);
         teacherTest.addClass(classExample);
+        teachers.add(teacherTest);
         //classQuestions.put("HIST 1234", hist1234_questions);
 
         Question statesQ = new Question("How many states are there in the US?", "40", "45", "48", "50", "52", 3, 8);
@@ -75,9 +77,46 @@ public class Globals {
         return classQs;
     }
 
-    public static ArrayList<Question> getQuestionList(String c)
+    public static ArrayList<Question> getQuestionList(Teacher t, String c)
     {
-        return teacherTest.getClass(c).getQuestions();
+        return t.getClass(c).getQuestions();
+    }
+
+    public static Teacher getTeacher(String id)
+    {
+        for (Teacher t: teachers)
+        {
+            if(t.getId().equals(id)) {
+                return t;
+            }
+        }
+        return null;
+    }
+
+    public static void addTeacher(String id)
+    {
+        Teacher t = new Teacher(id);
+        teachers.add(t);
+    }
+
+    public static String getActiveTeacher()
+    {
+        return activeTeacher;
+    }
+
+    public static void setActiveTeacher(String id)
+    {
+        activeTeacher = id;
+    }
+
+    public static String getTempClass()
+    {
+        return tempClass;
+    }
+
+    public static void setTempClass(String c)
+    {
+        tempClass = c;
     }
 
     public static void init() {

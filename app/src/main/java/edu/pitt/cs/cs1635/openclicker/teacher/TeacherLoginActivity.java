@@ -5,11 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-
-import java.io.Serializable;
+import android.widget.EditText;
 
 import edu.pitt.cs.cs1635.openclicker.R;
-import edu.pitt.cs.cs1635.openclicker.ServerEmu;
 
 public class TeacherLoginActivity extends AppCompatActivity {
 
@@ -23,6 +21,7 @@ public class TeacherLoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TeacherLoginActivity.this, TeacherClassListActivity.class);
+                intent.putExtra("Id", ((EditText) findViewById(R.id.idInput)).getText().toString());
                 startActivity(intent);
             }
         });

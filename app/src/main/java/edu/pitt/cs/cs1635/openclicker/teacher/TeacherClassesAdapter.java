@@ -20,6 +20,7 @@ import edu.pitt.cs.cs1635.openclicker.R;
 public class TeacherClassesAdapter extends BaseAdapter implements ListAdapter {
     private ArrayList<String> list = new ArrayList<String>();
     private Context context;
+    private String teacher;
 
     public TeacherClassesAdapter(ArrayList<String> list, Context context) {
         this.list = list;
@@ -49,6 +50,8 @@ public class TeacherClassesAdapter extends BaseAdapter implements ListAdapter {
             view = inflater.inflate(R.layout.list_teacher_classes, null);
         }
 
+        teacher = Globals.getActiveTeacher();
+
         // Set class name
         TextView listItemText = (TextView) view.findViewById(R.id.list_class_name);
         listItemText.setText(list.get(position));
@@ -57,9 +60,10 @@ public class TeacherClassesAdapter extends BaseAdapter implements ListAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Globals.currentTeacherClass = list.get(position);
+                //Globals.currentTeacherClass = list.get(position);
                 Intent intent = new Intent(context, ClassInfoActivity.class);
                 intent.putExtra("Class", list.get(position));
+                intent.putExtra("Id", teacher);
                 context.startActivity(intent);
             }
         });
