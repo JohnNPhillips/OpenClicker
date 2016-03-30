@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import edu.pitt.cs.cs1635.openclicker.Globals;
 import edu.pitt.cs.cs1635.openclicker.Question;
@@ -15,6 +17,9 @@ import edu.pitt.cs.cs1635.openclicker.R;
 public class CreateQuestionActivity extends AppCompatActivity {
 
     private RadioButton[] radios = new RadioButton[5];
+    private SeekBar timeBar;
+    private TextView timeLabel;
+    private int seconds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,39 @@ public class CreateQuestionActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        timeBar = (SeekBar) findViewById(R.id.timeSelection);
+        timeLabel = (TextView) findViewById(R.id.secondsLabel);
+
+        timeLabel.setText("0 seconds");
+        seconds = 0;
+
+        timeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if(progress == 1)
+                {
+                    timeLabel.setText("1 second");
+                    seconds = 1;
+                }
+                else
+                {
+                    timeLabel.setText(Integer.toString(progress) + " seconds");
+                    seconds = progress;
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
 
         radios[0] = (RadioButton) findViewById(R.id.question_a_correct);
         radios[1] = (RadioButton) findViewById(R.id.question_b_correct);
@@ -64,6 +102,8 @@ public class CreateQuestionActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 
     private void saveQuestion() {
@@ -81,7 +121,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
             }
         }
 
-        Question newQ = new Question(questionTitle, ansA, ansB, ansC, ansD, ansE, correct_ans);
+        Question newQ = new Question(questionTitle, ansA, ansB, ansC, ansD, ansE, correct_ans, seconds);
         Globals.addQuestionToCurrentClass(newQ);
     }
 }

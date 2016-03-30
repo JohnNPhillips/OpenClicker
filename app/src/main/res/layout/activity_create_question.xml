@@ -173,5 +173,26 @@
                 android:text="Start Question" />
         </LinearLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal">
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/timeSelection"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="seconds"
+                android:id="@+id/secondsLabel"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/timeSelection"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
     </LinearLayout>
 </RelativeLayout>
