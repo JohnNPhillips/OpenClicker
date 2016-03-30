@@ -13,6 +13,8 @@ import edu.pitt.cs.cs1635.openclicker.R;
 
 public class AnswerQuestionActivity extends AppCompatActivity {
 
+    CountDownTimer timer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +46,7 @@ public class AnswerQuestionActivity extends AppCompatActivity {
 
         // Countdown  timer
         final TextView timeRemaining = (TextView)findViewById(R.id.answer_time_remaining);
-        new CountDownTimer(10000, 1000) {
+        timer = new CountDownTimer(10000, 1000) {
             public void onTick(long millisUntilFinished) {
                 timeRemaining.setText("Time Remaining: 00:" + String.format("%02d", millisUntilFinished / 1000));
             }
@@ -55,5 +57,13 @@ public class AnswerQuestionActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }.start();
+    }
+
+    @Override
+    public void onStop()
+    {
+        super.onStop();
+
+        timer.cancel();
     }
 }
