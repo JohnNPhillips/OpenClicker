@@ -15,6 +15,7 @@ import edu.pitt.cs.cs1635.openclicker.student.WaitForQuestionActivity;
 public class AskQuestionActivity extends AppCompatActivity {
 
     ImageView image;
+    TextView question;
     int currentSlide;
     int[] images;
 
@@ -23,6 +24,9 @@ public class AskQuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ask_question);
         image = (ImageView) findViewById(R.id.imageView1);
+        question = (TextView) findViewById(R.id.questionTLabel);
+
+        question.setText(getIntent().getExtras().getString("Question"));
 
         images = new int[8];
         images[0] = R.drawable.graph0;
