@@ -33,6 +33,8 @@ public class CreateQuestionActivity extends AppCompatActivity {
                 saveQuestion();
 
                 Intent intent = new Intent(CreateQuestionActivity.this, AskQuestionActivity.class);
+                intent.putExtra("Question", ((EditText) findViewById(R.id.teacher_create_question_title)).getText().toString());
+                intent.putExtra("Time", seconds);
                 startActivity(intent);
             }
         });
