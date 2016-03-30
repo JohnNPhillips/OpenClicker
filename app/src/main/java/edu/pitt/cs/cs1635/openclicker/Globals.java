@@ -1,12 +1,15 @@
 package edu.pitt.cs.cs1635.openclicker;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 
 public class Globals {
     public static ArrayList<String> studentClassList = new ArrayList<>();
     private static ArrayList<Teacher> teachers = new ArrayList<Teacher>();
+    private static Hashtable<String, Teacher> rLookUpTeacher = new Hashtable<String, Teacher>(); //use this for looking up who the teacher is when student adds class
     //public static ArrayList<String> teacherClassList = new ArrayList<>();
 
     private static HashMap<String, List<Question>> classQuestions = new HashMap<>();
@@ -35,6 +38,9 @@ public class Globals {
         classExample.addQuestion(q2);
         classExample.addQuestion(q3);
         teacherTest.addClass(classExample);
+        teacherTest.addClass(classExample2);
+        rLookUpTeacher.put(classExample.getClassName(), teacherTest);
+        rLookUpTeacher.put(classExample2.getClassName(), teacherTest);
         teachers.add(teacherTest);
         //classQuestions.put("HIST 1234", hist1234_questions);
 
@@ -117,6 +123,21 @@ public class Globals {
     public static void setTempClass(String c)
     {
         tempClass = c;
+    }
+
+    public static Teacher getTeacherFromClass(String name)
+    {
+        if(rLookUpTeacher.containsKey(name))
+        {
+            return rLookUpTeacher.get(name);
+        }
+
+        return null;
+    }
+
+    public static void addRLookup(String c, Teacher t)
+    {
+        rLookUpTeacher.put(c, t);
     }
 
     public static void init() {

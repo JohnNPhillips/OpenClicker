@@ -38,6 +38,7 @@ public class CreateClassActivity extends AppCompatActivity {
                 if (!name.isEmpty()) {
                     ClassObject c = new ClassObject(name);
                     Globals.getTeacher(teacher).addClass(c);
+                    Globals.addRLookup(c.getClassName(), Globals.getTeacher(teacher));
                 }
 
                 Intent intent = new Intent(CreateClassActivity.this, TeacherClassListActivity.class);
