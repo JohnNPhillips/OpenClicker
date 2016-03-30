@@ -35,8 +35,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Teacher ID:"
-                    android:id="@+id/textView4"
-                    android:layout_gravity="center_horizontal"/>
+                    android:id="@+id/textView4" />
 
                 <EditText
                     android:layout_width="wrap_content"
