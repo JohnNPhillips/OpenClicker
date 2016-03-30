@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.io.Serializable;
+
 import edu.pitt.cs.cs1635.openclicker.student.StudentLoginActivity;
 import edu.pitt.cs.cs1635.openclicker.teacher.TeacherLoginActivity;
 
@@ -16,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Globals.init(); //initializes Globals -- Don't touch ask Luke Kljucaric
 
         Button student = (Button)findViewById(R.id.main_student);
         student.setOnClickListener(new View.OnClickListener() {

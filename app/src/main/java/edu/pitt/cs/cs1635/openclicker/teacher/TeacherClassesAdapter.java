@@ -59,6 +59,7 @@ public class TeacherClassesAdapter extends BaseAdapter implements ListAdapter {
             public void onClick(View v) {
                 Globals.currentTeacherClass = list.get(position);
                 Intent intent = new Intent(context, ClassInfoActivity.class);
+                intent.putExtra("Class", list.get(position));
                 context.startActivity(intent);
             }
         });

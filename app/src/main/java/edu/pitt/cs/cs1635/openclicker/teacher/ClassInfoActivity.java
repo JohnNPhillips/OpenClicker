@@ -27,7 +27,9 @@ public class ClassInfoActivity extends AppCompatActivity {
             }
         });
 
-        QuestionsAdapter adapter = new QuestionsAdapter(Globals.getQuestionListForTeacher(), this);
+        String className = getIntent().getStringExtra("Class");
+
+        QuestionsAdapter adapter = new QuestionsAdapter(Globals.getQuestionList(className), this);
         ListView question_list = (ListView) findViewById(R.id.teacher_questions_list);
         question_list.setAdapter(adapter);
 

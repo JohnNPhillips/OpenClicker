@@ -17,10 +17,10 @@ import edu.pitt.cs.cs1635.openclicker.Question;
 import edu.pitt.cs.cs1635.openclicker.R;
 
 public class QuestionsAdapter extends BaseAdapter implements ListAdapter {
-    private List<Question> list = new ArrayList<Question>();
+    private ArrayList<Question> list = new ArrayList<Question>();
     private Context context;
 
-    public QuestionsAdapter(List<Question> list, Context context) {
+    public QuestionsAdapter(ArrayList<Question> list, Context context) {
         this.list = list;
         this.context = context;
     }

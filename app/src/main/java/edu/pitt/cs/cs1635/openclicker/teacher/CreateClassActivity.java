@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import edu.pitt.cs.cs1635.openclicker.ClassObject;
 import edu.pitt.cs.cs1635.openclicker.Globals;
 import edu.pitt.cs.cs1635.openclicker.R;
 
@@ -25,7 +26,8 @@ public class CreateClassActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String name = className.getText().toString().trim();
                 if (!name.isEmpty()) {
-                    Globals.teacherClassList.add(name);
+                    ClassObject c = new ClassObject(name);
+                    Globals.teacherTest.addClass(c);
                 }
 
                 Intent intent = new Intent(CreateClassActivity.this, TeacherClassListActivity.class);

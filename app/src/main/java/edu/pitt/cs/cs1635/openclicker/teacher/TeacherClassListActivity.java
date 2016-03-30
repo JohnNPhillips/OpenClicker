@@ -11,6 +11,9 @@ import android.widget.ListView;
 
 import edu.pitt.cs.cs1635.openclicker.Globals;
 import edu.pitt.cs.cs1635.openclicker.R;
+import edu.pitt.cs.cs1635.openclicker.ServerEmu;
+
+import static edu.pitt.cs.cs1635.openclicker.Globals.*;
 
 public class TeacherClassListActivity extends AppCompatActivity {
 
@@ -45,7 +48,7 @@ public class TeacherClassListActivity extends AppCompatActivity {
             }
         });
 
-        TeacherClassesAdapter adapter = new TeacherClassesAdapter(Globals.teacherClassList, this);
+        TeacherClassesAdapter adapter = new TeacherClassesAdapter(Globals.teacherTest.getClassList(), this);
         ListView class_list = (ListView) findViewById(R.id.teacher_class_list);
         class_list.setAdapter(adapter);
     }
