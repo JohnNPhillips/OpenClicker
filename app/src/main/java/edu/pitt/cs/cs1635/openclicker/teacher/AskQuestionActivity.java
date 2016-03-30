@@ -14,6 +14,7 @@ import edu.pitt.cs.cs1635.openclicker.student.WaitForQuestionActivity;
 
 public class AskQuestionActivity extends AppCompatActivity {
 
+    CountDownTimer timer;
     ImageView image;
     TextView question;
     int currentSlide, seconds;
@@ -43,7 +44,7 @@ public class AskQuestionActivity extends AppCompatActivity {
         image.setImageResource(images[0]);
 
         final TextView timeRemaining = (TextView)findViewById(R.id.time_remaining);
-        new CountDownTimer(seconds * 1000, 1000) {
+        timer = new CountDownTimer(seconds * 1000, 1000) {
             public void onTick(long millisUntilFinished) {
                 if(millisUntilFinished < 1000f * (seconds - currentSlide)) image.setImageResource(images[currentSlide++]);
                 timeRemaining.setText("Time Remaining: 00:" + String.format("%02d", millisUntilFinished / 1000));
@@ -53,5 +54,13 @@ public class AskQuestionActivity extends AppCompatActivity {
                 timeRemaining.setText("Final results");
             }
         }.start();
+    }
+
+    @Override
+    public void onStop()
+    {
+        super.onStop();
+
+        timer.cancel();
     }
 }
