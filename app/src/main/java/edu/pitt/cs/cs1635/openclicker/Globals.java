@@ -51,7 +51,7 @@ public class Globals {
     }
 
     public static String getClassCode(String className) {
-        return ((className.hashCode() % 900000) + 100000) + "";
+        return (Math.abs(className.hashCode() % 900000) + 100000) + "";
     }
 
     public static String getClassNameFromCode(String classCode) {
