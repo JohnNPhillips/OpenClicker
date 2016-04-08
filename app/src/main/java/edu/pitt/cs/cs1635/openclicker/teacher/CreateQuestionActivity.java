@@ -117,8 +117,6 @@ public class CreateQuestionActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 
     private void saveQuestion() {

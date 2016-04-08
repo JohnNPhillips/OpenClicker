@@ -28,7 +28,8 @@
         android:layout_alignTop="@+id/textView4"
         android:layout_toEndOf="@+id/textView4"
         android:layout_toRightOf="@+id/textView4"
-        android:hint="                       " />
+        android:hint="                       "
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/teacher_createClass"

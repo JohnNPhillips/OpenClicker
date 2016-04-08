@@ -28,7 +28,8 @@
         android:layout_alignTop="@+id/textView4"
         android:layout_toEndOf="@+id/textView4"
         android:layout_toRightOf="@+id/textView4"
-        android:hint="                       " />
+        android:hint="                       "
+        android:inputType="numberPassword" />
 
     <Button
         android:id="@+id/student_enrollClass"

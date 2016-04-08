@@ -28,7 +28,8 @@
         <EditText
             android:id="@+id/teacher_create_question_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="textEmailSubject" />
 
         <TextView
             android:id="@+id/textView9"
@@ -57,7 +58,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignTop="@+id/question_a_correct"
-                android:layout_toRightOf="@+id/question_a_correct" />
+                android:layout_toRightOf="@+id/question_a_correct"
+                android:inputType="textEmailSubject" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -80,7 +82,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignTop="@+id/question_b_correct"
-                android:layout_toRightOf="@+id/question_b_correct" />
+                android:layout_toRightOf="@+id/question_b_correct"
+                android:inputType="textEmailSubject" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -103,7 +106,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignTop="@+id/question_c_correct"
-                android:layout_toRightOf="@+id/question_c_correct" />
+                android:layout_toRightOf="@+id/question_c_correct"
+                android:inputType="textEmailSubject" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -126,7 +130,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignTop="@+id/question_d_correct"
-                android:layout_toRightOf="@+id/question_d_correct" />
+                android:layout_toRightOf="@+id/question_d_correct"
+                android:inputType="textEmailSubject" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -149,7 +154,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignTop="@+id/question_e_correct"
-                android:layout_toRightOf="@+id/question_e_correct" />
+                android:layout_toRightOf="@+id/question_e_correct"
+                android:inputType="textEmailSubject" />
 
         </RelativeLayout>
 
