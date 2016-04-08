@@ -1,32 +1,75 @@
 package edu.pitt.cs.cs1635.openclicker;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.List;
 
 public class Globals {
-    public static ArrayList<String> studentClassList = new ArrayList<>();
-    private static ArrayList<Teacher> teachers = new ArrayList<Teacher>();
-    private static ArrayList<Student> students = new ArrayList<>();
-    private static Hashtable<String, Teacher> rLookUpTeacher = new Hashtable<String, Teacher>(); //use this for looking up who the teacher is when student adds class
-    //public static ArrayList<String> teacherClassList = new ArrayList<>();
 
-    private static HashMap<String, List<Question>> classQuestions = new HashMap<>();
+    /**
+     * IMPORTANT USAGE NOTES
+     *
+     *      The variables activeStudent, activeTeacher, activeClass, and activeQuestion
+     *      must be maintained accurately. These globals prevent us from having to pass
+     *      lots of strings whenever we switch intents (and then look-up the objects based
+     *      on the strings).
+     *
+     *      Student and teacher objects can be accessed by id through this Globals class,
+     *      but if you want the currently active student or teacher, use the variables mentioned
+     *      in the previous note.
+     *
+     *      All ClassObject objects can be accessed through the teacher or student objects.
+     *
+     *      All Question objects can be accessed through the appropriate ClassObject
+     */
 
-    private static String currentTeacherClass = null, activeTeacher = null, tempClass = null, activeStudent = null;
+    /**
+     * Miscellaneous Methods
+     *   getClassFromCode(code)
+     *   init()
+     */
 
-    private static Teacher teacherTest = new Teacher("100");
-    private static ClassObject classExample = new ClassObject("HIST 1234");
-    private static ClassObject classExample2 = new ClassObject("HIST 2300");
+    /**
+     * Maps from ids to student/teacher objects
+     *   This way we don't have to loop through every teacher/student when retrieving
+     *
+     *   teachers
+     *      addTeacher(Teacher)
+     *      getTeacher(id)
+     *   students
+     *      addStudent(Student)
+     *      getStudent(id)
+     */
+    private static Hashtable<String,Teacher> teachers = new Hashtable<>();
+    private static Hashtable<String,Student> students = new Hashtable<>();
 
+    /**
+     * State that keeps track of what is currently going on in the app
+     *      activeTeacher
+     *          setActiveTeacher(Teacher)
+     *          getActiveTeacher()
+     *      activeStudent
+     *          setActiveStudent(Student)
+     *          getActiveStudent()
+     *      activeClass
+     *          setActiveClass(ClassObj)
+     *          getActiveClass()
+     *      activeQuestion
+     *          setActiveQuestion(Question)
+     *          getActiveQuestion()
+     */
+    private static Teacher activeTeacher = null;
+    private static Student activeStudent = null;
+    private static ClassObject activeClass = null;
+    private static Question activeQuestion = null;
+    protected static boolean onTeacherSide = false; // set from start-up screen, altered by "question asked" notification
+
+    /**
+     * Hard-coded teacher and student with example classes and questions (DEMO ONLY)
+     */
     static {
-        //studentClassList.add("CS 1632");
-        //studentClassList.add("CS 1550");
-
-        //teacherClassList.add("HIST 1234");
-        //teacherClassList.add("HIST 2300");
+        Teacher teacherTest = new Teacher("100");
+        ClassObject classExample = new ClassObject("HIST 1234", teacherTest);
+        ClassObject classExample2 = new ClassObject("HIST 2300", teacherTest);
 
         ArrayList<Question> hist1234_questions = new ArrayList<>();
         Question q1 = new Question("What year did the civil war start?", "", "", "", "", "", 0, 8);
@@ -40,129 +83,105 @@ public class Globals {
         classExample.addQuestion(q3);
         teacherTest.addClass(classExample);
         teacherTest.addClass(classExample2);
-        rLookUpTeacher.put(classExample.getClassName(), teacherTest);
-        rLookUpTeacher.put(classExample2.getClassName(), teacherTest);
-        teachers.add(teacherTest);
-        //classQuestions.put("HIST 1234", hist1234_questions);
+        teachers.put(teacherTest.getId(), teacherTest);
 
-        Question statesQ = new Question("How many states are there in the US?", "40", "45", "48", "50", "52", 3, 8);
-        List<Question> hist101qs = new ArrayList<>();
-        hist101qs.add(statesQ);
-        classQuestions.put("CS 4321", hist101qs);
+        Student studentTest = new Student("100");
+        studentTest.addClass(classExample);
+        students.put(studentTest.getId(), studentTest);
     }
 
-    public static String getClassCode(String className) {
-        return (Math.abs(className.hashCode() % 900000) + 100000) + "";
-    }
+    /******************************
+     * Method Implementations
+     ******************************/
 
-    public static String getClassNameFromCode(String classCode) {
-        for (String className : teacherTest.getClassList()) {
-            if (getClassCode(className).equals(classCode)) {
-                return className;
-            }
-        }
+    /******************************
+     * Miscellaneous
+     ******************************/
 
-        return null;
-    }
-
-    public static void addQuestionToCurrentClass(Question q) {
-        List<Question> classQs = classQuestions.get(currentTeacherClass);
-        if (classQs == null) {
-            classQs = new ArrayList<>();
-        }
-
-        classQs.add(q);
-    }
-
-    public static List<Question> getQuestionListForTeacher() {
-        List<Question> classQs = classQuestions.get(currentTeacherClass);
-        if (classQs == null) {
-            classQs = new ArrayList<>();
-            classQuestions.put(currentTeacherClass, classQs);
-        }
-
-        return classQs;
-    }
-
-    public static ArrayList<Question> getQuestionList(Teacher t, String c)
-    {
-        return t.getClass(c).getQuestions();
-    }
-
-    public static Student getStudent(String id)
-    {
-        for (Student s: students)
-        {
-            if(s.getId().equals(id)) {
-                return s;
+    public static ClassObject getClassFromCode(String classCode) {
+        // class does not exist unless a teacher has it
+        //  this is our most expensive operation
+        for (Teacher t: teachers.values()) {
+            for (ClassObject classObj : t.getClassList()) {
+                if (classObj.getClassCode().equals(classCode)) {
+                    return classObj;
+                }
             }
         }
         return null;
-    }
-
-    public static void addStudent(String id)
-    {
-        Student s = new Student(id);
-        students.add(s);
-    }
-
-    public static Teacher getTeacher(String id)
-    {
-        for (Teacher t: teachers)
-        {
-            if(t.getId().equals(id)) {
-                return t;
-            }
-        }
-        return null;
-    }
-
-    public static void addTeacher(String id)
-    {
-        Teacher t = new Teacher(id);
-        teachers.add(t);
-    }
-
-    public static String getActiveStudent() { return  activeStudent;}
-
-    public static void setActiveStudent(String id) {activeStudent = id;}
-
-    public static String getActiveTeacher()
-    {
-        return activeTeacher;
-    }
-
-    public static void setActiveTeacher(String id)
-    {
-        activeTeacher = id;
-    }
-
-    public static String getTempClass()
-    {
-        return tempClass;
-    }
-
-    public static void setTempClass(String c)
-    {
-        tempClass = c;
-    }
-
-    public static Teacher getTeacherFromClass(String name)
-    {
-        if(rLookUpTeacher.containsKey(name))
-        {
-            return rLookUpTeacher.get(name);
-        }
-
-        return null;
-    }
-
-    public static void addRLookup(String c, Teacher t)
-    {
-        rLookUpTeacher.put(c, t);
     }
 
     public static void init() {
         //created so that Globals code can run -- Don't touch ask Luke Kljucaric
+    }
+
+    /******************************
+     * Teacher and Student Map Manipulators
+     ******************************/
+
+    public static Student getStudent(String id)
+    {
+        if(students.containsKey(id)) return students.get(id);
+        else return null;
+    }
+
+    public static void addStudent(Student s)
+    {
+        students.put(s.getId(), s);
+    }
+
+    public static Teacher getTeacher(String id)
+    {
+        if(teachers.containsKey(id)) return teachers.get(id);
+        else return null;
+    }
+
+    public static void addTeacher(Teacher t)
+    {
+        teachers.put(t.getId(), t);
+    }
+
+    /******************************
+     * State Manipulators
+     ******************************/
+
+    public static Student getActiveStudent()
+    {
+        return activeStudent;
+    }
+
+    public static void setActiveStudent(Student s)
+    {
+        activeStudent = s;
+    }
+
+    public static Teacher getActiveTeacher()
+    {
+        return activeTeacher;
+    }
+
+    public static void setActiveTeacher(Teacher t)
+    {
+        activeTeacher = t;
+    }
+
+    public static ClassObject getActiveClass()
+    {
+        return activeClass;
+    }
+
+    public static void setActiveClass(ClassObject c)
+    {
+        activeClass = c;
+    }
+
+    public static Question getActiveQuestion()
+    {
+        return activeQuestion;
+    }
+
+    public static void setActiveQuestion(Question q)
+    {
+        activeQuestion = q;
     }
 }

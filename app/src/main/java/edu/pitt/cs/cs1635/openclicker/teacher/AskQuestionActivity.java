@@ -1,22 +1,20 @@
 package edu.pitt.cs.cs1635.openclicker.teacher;
 
-import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
+import edu.pitt.cs.cs1635.openclicker.Globals;
+import edu.pitt.cs.cs1635.openclicker.Question;
 import edu.pitt.cs.cs1635.openclicker.R;
-import edu.pitt.cs.cs1635.openclicker.student.WaitForQuestionActivity;
 
 public class AskQuestionActivity extends AppCompatActivity {
 
     CountDownTimer timer;
     ImageView image;
-    TextView question;
+    TextView questionTextView;
     int currentSlide, seconds;
     int[] images;
 
@@ -25,10 +23,11 @@ public class AskQuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ask_question);
         image = (ImageView) findViewById(R.id.imageView1);
-        question = (TextView) findViewById(R.id.questionTLabel);
+        questionTextView = (TextView) findViewById(R.id.questionTLabel);
 
-        question.setText(getIntent().getExtras().getString("Question"));
-        seconds = getIntent().getExtras().getInt("Time");
+        Question question = Globals.getActiveQuestion();
+        questionTextView.setText(question.text);
+        seconds = question.seconds;
 
         images = new int[8];
         images[0] = R.drawable.graph0;

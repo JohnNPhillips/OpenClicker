@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/idInput"
                     android:hint="                       "
-                    android:inputType="numberDecimal" />
+                    android:inputType="number" />
             </LinearLayout>
 
             <Button

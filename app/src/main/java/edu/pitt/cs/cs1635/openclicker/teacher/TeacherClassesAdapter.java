@@ -14,16 +14,21 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import edu.pitt.cs.cs1635.openclicker.ClassObject;
 import edu.pitt.cs.cs1635.openclicker.Globals;
 import edu.pitt.cs.cs1635.openclicker.R;
+import edu.pitt.cs.cs1635.openclicker.Teacher;
 
 public class TeacherClassesAdapter extends BaseAdapter implements ListAdapter {
     private ArrayList<String> list = new ArrayList<String>();
     private Context context;
 
-    public TeacherClassesAdapter(ArrayList<String> list, Context context) {
-        this.list = list;
+    public TeacherClassesAdapter(ArrayList<ClassObject> classList, Context context) {
         this.context = context;
+        this.list = new ArrayList<>();
+        for (ClassObject c: classList) {
+            list.add(c.getClassName());
+        }
     }
 
     @Override
@@ -57,9 +62,10 @@ public class TeacherClassesAdapter extends BaseAdapter implements ListAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Globals.currentTeacherClass = list.get(position);
                 Intent intent = new Intent(context, ClassInfoActivity.class);
-                intent.putExtra("Class", list.get(position));
+                //Globals.currentTeacherClass = list.get(position);
+                Teacher teacher = Globals.getActiveTeacher();
+                Globals.setActiveClass(teacher.getClass(list.get(position)));
                 context.startActivity(intent);
             }
         });
@@ -75,6 +81,10 @@ public class TeacherClassesAdapter extends BaseAdapter implements ListAdapter {
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
+                                Teacher teacher = Globals.getActiveTeacher();
+                                ClassObject toDelete = teacher.getClass(list.get(position));
+                                toDelete.delete();
+
                                 list.remove(position);
                                 notifyDataSetChanged();
                             }

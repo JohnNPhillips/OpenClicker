@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         student.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Globals.onTeacherSide = true;
                 Intent intent = new Intent(MainActivity.this, StudentLoginActivity.class);
                 startActivity(intent);
             }
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         teacher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Globals.onTeacherSide = false;
                 Intent intent = new Intent(MainActivity.this, TeacherLoginActivity.class);
                 startActivity(intent);
             }

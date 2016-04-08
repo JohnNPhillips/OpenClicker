@@ -22,15 +22,7 @@ public class Student {
 
     public boolean removeClass(ClassObject c)
     {
-        if(classes.contains(c))
-        {
-            classes.remove(c);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return classes.remove(c);
     }
 
     public ClassObject getClass(String cName)
@@ -42,20 +34,12 @@ public class Student {
                 return c;
             }
         }
-
         return null;
     }
 
-    public ArrayList<String> getClassList()
+    public ArrayList<ClassObject> getClassList()
     {
-        ArrayList<String> list = new ArrayList<String>();
-
-        for (ClassObject c: classes)
-        {
-            list.add(c.getClassName());
-        }
-
-        return list;
+        return classes;
     }
 
     public String getId()

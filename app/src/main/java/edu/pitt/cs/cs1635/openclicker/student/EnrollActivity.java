@@ -45,16 +45,15 @@ public class EnrollActivity extends AppCompatActivity {
     private void enroll() {
         final EditText classCode = (EditText) findViewById(R.id.student_classCode);
         String code = classCode.getText().toString().trim();
-        String className = Globals.getClassNameFromCode(code);
-        if (className == null) {
+        ClassObject enrolledClass = Globals.getClassFromCode(code);
+        if (enrolledClass == null) {
             Toast.makeText(EnrollActivity.this, "Sorry, no class with that code could be found", Toast.LENGTH_LONG).show();
             return;
         }
-        ClassObject enrolledClass = Globals.getTeacherFromClass(className).getClass(className);
-        Student toEnroll = Globals.getStudent(Globals.getActiveStudent());
+        Student toEnroll = Globals.getActiveStudent();
 
         toEnroll.addClass(enrolledClass);
-        enrolledClass.addStudent(toEnroll.getId());
+        enrolledClass.addStudent(toEnroll);
 
         Intent intent = new Intent(EnrollActivity.this, StudentClassListActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

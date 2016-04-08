@@ -13,6 +13,7 @@ import android.widget.TextView;
 import edu.pitt.cs.cs1635.openclicker.Globals;
 import edu.pitt.cs.cs1635.openclicker.Question;
 import edu.pitt.cs.cs1635.openclicker.R;
+import edu.pitt.cs.cs1635.openclicker.Teacher;
 
 public class CreateQuestionActivity extends AppCompatActivity {
 
@@ -20,7 +21,6 @@ public class CreateQuestionActivity extends AppCompatActivity {
     private SeekBar timeBar;
     private TextView timeLabel;
     private int seconds;
-    private String className = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +31,10 @@ public class CreateQuestionActivity extends AppCompatActivity {
         askQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveQuestion();
+                Question question = saveQuestion();
+                Globals.setActiveQuestion(question);
 
                 Intent intent = new Intent(CreateQuestionActivity.this, AskQuestionActivity.class);
-                intent.putExtra("Question", ((EditText) findViewById(R.id.teacher_create_question_title)).getText().toString());
-                intent.putExtra("Time", seconds);
                 startActivity(intent);
             }
         });
@@ -45,10 +44,6 @@ public class CreateQuestionActivity extends AppCompatActivity {
 
         timeLabel.setText("0 seconds");
         seconds = 0;
-
-        if(getIntent().hasExtra("Class")) {
-            className = getIntent().getStringExtra("Class");
-        }
 
         timeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -111,7 +106,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
         });
     }
 
-    private void saveQuestion() {
+    private Question saveQuestion() {
         String questionTitle = ((EditText) findViewById(R.id.teacher_create_question_title)).getText().toString();
         String ansA = ((EditText) findViewById(R.id.question_a_text)).getText().toString();
         String ansB = ((EditText) findViewById(R.id.question_b_text)).getText().toString();
@@ -127,7 +122,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
         }
 
         Question newQ = new Question(questionTitle, ansA, ansB, ansC, ansD, ansE, correct_ans, seconds);
-        String teacher = Globals.getActiveTeacher();
-        Globals.getTeacher(teacher).getClass(className).addQuestion(newQ);
+        Globals.getActiveClass().addQuestion(newQ);
+        return newQ;
     }
 }

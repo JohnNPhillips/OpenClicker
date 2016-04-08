@@ -40,26 +40,11 @@ public class Teacher {
 
     public boolean removeClass(ClassObject c)
     {
-        if(classes.contains(c))
-        {
-            classes.remove(c);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return classes.remove(c);
     }
 
-    public ArrayList<String> getClassList()
+    public ArrayList<ClassObject> getClassList()
     {
-        ArrayList<String> list = new ArrayList<String>();
-
-        for (ClassObject c: classes)
-        {
-            list.add(c.getClassName());
-        }
-
-        return list;
+        return classes;
     }
 }

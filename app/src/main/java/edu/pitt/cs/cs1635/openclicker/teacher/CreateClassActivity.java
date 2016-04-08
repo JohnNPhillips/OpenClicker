@@ -13,6 +13,7 @@ import android.widget.TextView;
 import edu.pitt.cs.cs1635.openclicker.ClassObject;
 import edu.pitt.cs.cs1635.openclicker.Globals;
 import edu.pitt.cs.cs1635.openclicker.R;
+import edu.pitt.cs.cs1635.openclicker.Teacher;
 
 public class CreateClassActivity extends AppCompatActivity {
 
@@ -41,17 +42,15 @@ public class CreateClassActivity extends AppCompatActivity {
     }
 
     private void createClass() {
-        String teacher = Globals.getActiveTeacher();
+        Teacher teacher = Globals.getActiveTeacher();
         final EditText className = (EditText) findViewById(R.id.teacher_className);
         String name = className.getText().toString().trim();
         if (!name.isEmpty()) {
-            ClassObject c = new ClassObject(name);
-            Globals.getTeacher(teacher).addClass(c);
-            Globals.addRLookup(c.getClassName(), Globals.getTeacher(teacher));
+            ClassObject c = new ClassObject(name, teacher);
+            teacher.addClass(c);
         }
 
         Intent intent = new Intent(CreateClassActivity.this, TeacherClassListActivity.class);
-        intent.putExtra(TeacherClassListActivity.NEW_CLASS_CODE, Globals.getClassCode(name));
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

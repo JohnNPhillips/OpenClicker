@@ -11,8 +11,8 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import edu.pitt.cs.cs1635.openclicker.Globals;
 import edu.pitt.cs.cs1635.openclicker.Question;
 import edu.pitt.cs.cs1635.openclicker.R;
 
@@ -64,8 +64,7 @@ public class QuestionsAdapter extends BaseAdapter implements ListAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, AskQuestionActivity.class);
-                intent.putExtra("Question", list.get(position).text);
-                intent.putExtra("Time", list.get(position).seconds);
+                Globals.setActiveQuestion(list.get(position));
                 context.startActivity(intent);
             }
         });

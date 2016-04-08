@@ -29,7 +29,7 @@
         android:layout_toEndOf="@+id/textView4"
         android:layout_toRightOf="@+id/textView4"
         android:hint="                       "
-        android:inputType="numberPassword" />
+        android:inputType="number" />
 
     <Button
         android:id="@+id/student_enrollClass"

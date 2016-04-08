@@ -15,13 +15,12 @@ import edu.pitt.cs.cs1635.openclicker.Student;
 
 public class StudentClassListActivity extends AppCompatActivity {
 
-    private String student = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_class_list);
 
-        student = Globals.getActiveStudent();
+        Student student = Globals.getActiveStudent();
 
         Button addClass = (Button)findViewById(R.id.student_addClass);
         addClass.setOnClickListener(new View.OnClickListener() {
@@ -32,7 +31,7 @@ public class StudentClassListActivity extends AppCompatActivity {
             }
         });
 
-        StudentClassesAdapter adapter = new StudentClassesAdapter(Globals.getStudent(student).getClassList(), this);
+        StudentClassesAdapter adapter = new StudentClassesAdapter(student.getClassList(), this);
         ListView class_list = (ListView)findViewById(R.id.student_class_list);
         class_list.setAdapter(adapter);
     }

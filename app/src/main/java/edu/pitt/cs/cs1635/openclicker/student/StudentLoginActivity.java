@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import edu.pitt.cs.cs1635.openclicker.Globals;
 import edu.pitt.cs.cs1635.openclicker.R;
+import edu.pitt.cs.cs1635.openclicker.Student;
 
 public class StudentLoginActivity extends AppCompatActivity {
 
@@ -50,7 +51,8 @@ public class StudentLoginActivity extends AppCompatActivity {
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            String student = ((EditText) findViewById(R.id.idInput)).getText().toString();
+                            String studentId = ((EditText) findViewById(R.id.idInput)).getText().toString();
+                            Student student = new Student(studentId);
                             Globals.addStudent(student);
                             Globals.setActiveStudent(student);
                             Intent intent = new Intent(StudentLoginActivity.this, StudentClassListActivity.class);
@@ -67,7 +69,8 @@ public class StudentLoginActivity extends AppCompatActivity {
         }
         else
         {
-            Globals.setActiveStudent(id);
+            Student student = Globals.getStudent(id);
+            Globals.setActiveStudent(student);
             Intent intent = new Intent(StudentLoginActivity.this, StudentClassListActivity.class);
             startActivity(intent);
         }

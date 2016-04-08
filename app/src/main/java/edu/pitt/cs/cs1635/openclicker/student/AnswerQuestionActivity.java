@@ -34,11 +34,8 @@ public class AnswerQuestionActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     for (Button b : answers) {
-                        //b.setEnabled(true);
                         b.setBackgroundResource(R.drawable.button);
                     }
-
-                    //ans_button.setEnabled(false);
                     ans_button.requestFocus();
                 }
             });

@@ -14,15 +14,21 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import edu.pitt.cs.cs1635.openclicker.ClassObject;
+import edu.pitt.cs.cs1635.openclicker.Globals;
 import edu.pitt.cs.cs1635.openclicker.R;
+import edu.pitt.cs.cs1635.openclicker.Student;
 
 public class StudentClassesAdapter extends BaseAdapter implements ListAdapter {
     private ArrayList<String> list = new ArrayList<String>();
     private Context context;
 
-    public StudentClassesAdapter(ArrayList<String> list, Context context) {
-        this.list = list;
+    public StudentClassesAdapter(ArrayList<ClassObject> classList, Context context) {
         this.context = context;
+        this.list = new ArrayList<>();
+        for (ClassObject c: classList) {
+            this.list.add(c.getClassName());
+        }
     }
 
     @Override
@@ -72,6 +78,9 @@ public class StudentClassesAdapter extends BaseAdapter implements ListAdapter {
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
+                                Student student = Globals.getActiveStudent();
+                                ClassObject c = student.getClass(list.get(position));
+                                student.removeClass(c);
                                 list.remove(position);
                                 notifyDataSetChanged();
                             }
