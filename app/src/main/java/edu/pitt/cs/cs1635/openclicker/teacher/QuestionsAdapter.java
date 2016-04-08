@@ -1,7 +1,11 @@
 package edu.pitt.cs.cs1635.openclicker.teacher;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +19,7 @@ import java.util.ArrayList;
 import edu.pitt.cs.cs1635.openclicker.Globals;
 import edu.pitt.cs.cs1635.openclicker.Question;
 import edu.pitt.cs.cs1635.openclicker.R;
+import edu.pitt.cs.cs1635.openclicker.student.AnswerQuestionActivity;
 
 public class QuestionsAdapter extends BaseAdapter implements ListAdapter {
     private ArrayList<Question> list = new ArrayList<Question>();
@@ -63,8 +68,40 @@ public class QuestionsAdapter extends BaseAdapter implements ListAdapter {
         askQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Question question = list.get(position);
+                Globals.setActiveQuestion(question);
+
+                // Send a notification to the "student" (DEMO ONLY)
+
+                // Set activeStudent to the demo student
+                Globals.setActiveStudent(Globals.getStudent("100"));
+
+                // Build notification
+                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
+                mBuilder.setSmallIcon(R.drawable.button);
+                mBuilder.setContentTitle("OpenClicker");
+                mBuilder.setContentText(question.text);
+                mBuilder.setAutoCancel(true);
+
+                // Add action to be performed when notification is clicked
+                Intent resultIntent = new Intent(context, AnswerQuestionActivity.class);
+                TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+                stackBuilder.addParentStack(AnswerQuestionActivity.class);
+
+                // Adds the Intent that starts the Activity to the top of the stack
+                stackBuilder.addNextIntent(resultIntent);
+                PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
+                mBuilder.setContentIntent(resultPendingIntent);
+
+                // Issue notification (this only sends a notification to the demo student;
+                //   in reality we would send it to all the students in the class)
+                int notificationId = 100; // this could be the same as the student id
+                NotificationManager mNotificationManager =
+                        (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                mNotificationManager.notify(notificationId, mBuilder.build());
+
+                // Teacher views results
                 Intent intent = new Intent(context, AskQuestionActivity.class);
-                Globals.setActiveQuestion(list.get(position));
                 context.startActivity(intent);
             }
         });
