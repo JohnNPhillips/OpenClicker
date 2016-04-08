@@ -20,7 +20,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
     private SeekBar timeBar;
     private TextView timeLabel;
     private int seconds;
-    private String teacher = "", className = "";
+    private String className = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +45,6 @@ public class CreateQuestionActivity extends AppCompatActivity {
 
         timeLabel.setText("0 seconds");
         seconds = 0;
-
-        if(getIntent().hasExtra("Id")) {
-            teacher = getIntent().getStringExtra("Id");
-        }
-        else
-        {
-            teacher = Globals.getActiveTeacher();
-        }
 
         if(getIntent().hasExtra("Class")) {
             className = getIntent().getStringExtra("Class");
@@ -135,6 +127,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
         }
 
         Question newQ = new Question(questionTitle, ansA, ansB, ansC, ansD, ansE, correct_ans, seconds);
+        String teacher = Globals.getActiveTeacher();
         Globals.getTeacher(teacher).getClass(className).addQuestion(newQ);
     }
 }

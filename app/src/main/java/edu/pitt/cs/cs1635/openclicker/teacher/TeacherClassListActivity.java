@@ -15,20 +15,11 @@ import edu.pitt.cs.cs1635.openclicker.R;
 public class TeacherClassListActivity extends AppCompatActivity {
 
     public static final String NEW_CLASS_CODE = "NEW_CLASS_CODE";
-    private String teacher = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_class_list);
-
-        if(getIntent().hasExtra("Id")) {
-            teacher = getIntent().getStringExtra("Id");
-        }
-        else
-        {
-            teacher = Globals.getActiveTeacher();
-        }
 
         // Pop up class code for newly created class
         if (getIntent().hasExtra(NEW_CLASS_CODE)) {
@@ -50,18 +41,11 @@ public class TeacherClassListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TeacherClassListActivity.this, CreateClassActivity.class);
-                intent.putExtra("Id", teacher);
                 startActivity(intent);
             }
         });
 
-        if(Globals.getTeacher(teacher) == null) {
-
-            Globals.addTeacher(teacher);
-        }
-
-        Globals.setActiveTeacher(teacher);
-
+        String teacher = Globals.getActiveTeacher();
         TeacherClassesAdapter adapter = new TeacherClassesAdapter(Globals.getTeacher(teacher).getClassList(), this);
         ListView class_list = (ListView) findViewById(R.id.teacher_class_list);
         class_list.setAdapter(adapter);

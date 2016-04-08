@@ -16,20 +16,10 @@ import edu.pitt.cs.cs1635.openclicker.R;
 
 public class CreateClassActivity extends AppCompatActivity {
 
-    private String teacher = "";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_class);
-
-        if(getIntent().hasExtra("Id")) {
-            teacher = getIntent().getStringExtra("Id");
-        }
-        else
-        {
-            teacher = Globals.getActiveTeacher();
-        }
 
         Button createClass = (Button) findViewById(R.id.teacher_createClass);
         createClass.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +41,7 @@ public class CreateClassActivity extends AppCompatActivity {
     }
 
     private void createClass() {
+        String teacher = Globals.getActiveTeacher();
         final EditText className = (EditText) findViewById(R.id.teacher_className);
         String name = className.getText().toString().trim();
         if (!name.isEmpty()) {
