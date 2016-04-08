@@ -1,5 +1,7 @@
 package edu.pitt.cs.cs1635.openclicker.student;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import edu.pitt.cs.cs1635.openclicker.Globals;
 import edu.pitt.cs.cs1635.openclicker.R;
 
 public class StudentLoginActivity extends AppCompatActivity {
@@ -38,9 +41,35 @@ public class StudentLoginActivity extends AppCompatActivity {
         });
     }
 
-    private void login() {
-        Intent intent = new Intent(StudentLoginActivity.this, StudentClassListActivity.class);
-        intent.putExtra("Id", ((EditText) findViewById(R.id.idInput)).getText().toString());
-        startActivity(intent);
+    private void login(){
+        String id = ((EditText) findViewById(R.id.idInput)).getText().toString();
+        if(Globals.getStudent(id) == null) {
+            new AlertDialog.Builder(this)
+                    .setTitle("New Student")
+                    .setMessage("Is the ID: " + id + " correct? This will create a new student.")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String student = ((EditText) findViewById(R.id.idInput)).getText().toString();
+                            Globals.addStudent(student);
+                            Globals.setActiveStudent(student);
+                            Intent intent = new Intent(StudentLoginActivity.this, StudentClassListActivity.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //do nothing
+                        }
+                    })
+                    .create().show();
+        }
+        else
+        {
+            Globals.setActiveStudent(id);
+            Intent intent = new Intent(StudentLoginActivity.this, StudentClassListActivity.class);
+            startActivity(intent);
+        }
     }
 }

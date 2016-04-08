@@ -7,24 +7,24 @@ import java.util.ArrayList;
  */
 public class ClassObject {
     private String name;
-    private ArrayList<Integer> students;
+    private ArrayList<String> students;
     private ArrayList<Question> questions;
 
     public ClassObject(String n)
     {
         name = n;
         questions = new ArrayList<Question>();
-        students = new ArrayList<Integer>();
+        students = new ArrayList<String>();
     }
 
     public ClassObject(String n, ArrayList<Question> q)
     {
         name = n;
         questions = q;
-        students = new ArrayList<Integer>();
+        students = new ArrayList<String>();
     }
 
-    public void addStudent(int s)
+    public void addStudent(String s)
     {
         students.add(s);
     }

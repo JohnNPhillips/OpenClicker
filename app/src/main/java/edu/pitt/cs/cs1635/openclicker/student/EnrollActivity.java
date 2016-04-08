@@ -11,8 +11,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import edu.pitt.cs.cs1635.openclicker.ClassObject;
 import edu.pitt.cs.cs1635.openclicker.Globals;
 import edu.pitt.cs.cs1635.openclicker.R;
+import edu.pitt.cs.cs1635.openclicker.Student;
 
 public class EnrollActivity extends AppCompatActivity {
 
@@ -29,7 +31,7 @@ public class EnrollActivity extends AppCompatActivity {
             }
         });
 
-        EditText edit = (EditText) findViewById(R.id.idInput);
+        EditText edit = (EditText) findViewById(R.id.student_classCode);
         edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
@@ -48,8 +50,11 @@ public class EnrollActivity extends AppCompatActivity {
             Toast.makeText(EnrollActivity.this, "Sorry, no class with that code could be found", Toast.LENGTH_LONG).show();
             return;
         }
+        ClassObject enrolledClass = Globals.getTeacherFromClass(className).getClass(className);
+        Student toEnroll = Globals.getStudent(Globals.getActiveStudent());
 
-        Globals.studentClassList.add(className);
+        toEnroll.addClass(enrolledClass);
+        enrolledClass.addStudent(toEnroll.getId());
 
         Intent intent = new Intent(EnrollActivity.this, StudentClassListActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -9,20 +9,21 @@ import java.util.List;
 public class Globals {
     public static ArrayList<String> studentClassList = new ArrayList<>();
     private static ArrayList<Teacher> teachers = new ArrayList<Teacher>();
+    private static ArrayList<Student> students = new ArrayList<>();
     private static Hashtable<String, Teacher> rLookUpTeacher = new Hashtable<String, Teacher>(); //use this for looking up who the teacher is when student adds class
     //public static ArrayList<String> teacherClassList = new ArrayList<>();
 
     private static HashMap<String, List<Question>> classQuestions = new HashMap<>();
 
-    private static String currentTeacherClass = null, activeTeacher = null, tempClass = null;
+    private static String currentTeacherClass = null, activeTeacher = null, tempClass = null, activeStudent = null;
 
     private static Teacher teacherTest = new Teacher("100");
     private static ClassObject classExample = new ClassObject("HIST 1234");
     private static ClassObject classExample2 = new ClassObject("HIST 2300");
 
     static {
-        studentClassList.add("CS 1632");
-        studentClassList.add("CS 1550");
+        //studentClassList.add("CS 1632");
+        //studentClassList.add("CS 1550");
 
         //teacherClassList.add("HIST 1234");
         //teacherClassList.add("HIST 2300");
@@ -88,6 +89,23 @@ public class Globals {
         return t.getClass(c).getQuestions();
     }
 
+    public static Student getStudent(String id)
+    {
+        for (Student s: students)
+        {
+            if(s.getId().equals(id)) {
+                return s;
+            }
+        }
+        return null;
+    }
+
+    public static void addStudent(String id)
+    {
+        Student s = new Student(id);
+        students.add(s);
+    }
+
     public static Teacher getTeacher(String id)
     {
         for (Teacher t: teachers)
@@ -104,6 +122,10 @@ public class Globals {
         Teacher t = new Teacher(id);
         teachers.add(t);
     }
+
+    public static String getActiveStudent() { return  activeStudent;}
+
+    public static void setActiveStudent(String id) {activeStudent = id;}
 
     public static String getActiveTeacher()
     {
