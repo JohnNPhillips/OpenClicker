@@ -8,12 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import edu.pitt.cs.cs1635.openclicker.R;
 
 public class AnswerQuestionActivity extends AppCompatActivity {
 
-    CountDownTimer timer;
+    private boolean first_run = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class AnswerQuestionActivity extends AppCompatActivity {
 
         // Countdown  timer
         final TextView timeRemaining = (TextView)findViewById(R.id.answer_time_remaining);
-        timer = new CountDownTimer(10000, 1000) {
+        new CountDownTimer(15000, 1000) {
             public void onTick(long millisUntilFinished) {
                 timeRemaining.setText("Time Remaining: 00:" + String.format("%02d", millisUntilFinished / 1000));
             }
@@ -57,10 +58,24 @@ public class AnswerQuestionActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onStop()
-    {
-        super.onStop();
+    public void onResume() {
+        super.onResume();
+        if(first_run) {
+            first_run = false;
+        } else {
+            findViewById(R.id.answer_a).setEnabled(false);
+            findViewById(R.id.answer_b).setEnabled(false);
+            findViewById(R.id.answer_c).setEnabled(false);
+            findViewById(R.id.answer_d).setEnabled(false);
+            findViewById(R.id.answer_e).setEnabled(false);
 
-        timer.cancel();
+            Toast.makeText(this,"You exited the application. You are not permitted to change your answer.",
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
+    // disable back button
+    @Override
+    public void onBackPressed() {
     }
 }
