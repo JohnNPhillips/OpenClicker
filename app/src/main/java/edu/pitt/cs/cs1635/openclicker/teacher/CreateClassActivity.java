@@ -48,10 +48,11 @@ public class CreateClassActivity extends AppCompatActivity {
         if (!name.isEmpty()) {
             ClassObject c = new ClassObject(name, teacher);
             teacher.addClass(c);
-        }
 
-        Intent intent = new Intent(CreateClassActivity.this, TeacherClassListActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+            Intent intent = new Intent(CreateClassActivity.this, TeacherClassListActivity.class);
+            intent.putExtra(TeacherClassListActivity.NEW_CLASS_CODE, c.getClassCode());
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
     }
 }
