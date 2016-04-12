@@ -42,8 +42,8 @@ public class CreateQuestionActivity extends AppCompatActivity {
         timeBar = (SeekBar) findViewById(R.id.timeSelection);
         timeLabel = (TextView) findViewById(R.id.secondsLabel);
 
-        timeLabel.setText("0 seconds");
-        seconds = 0;
+        timeLabel.setText("20 seconds");
+        seconds = 20;
 
         timeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
