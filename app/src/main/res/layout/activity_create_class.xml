@@ -10,35 +10,39 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.pitt.cs.cs1635.openclicker.teacher.CreateClassActivity">
 
-    <TextView
-        android:id="@+id/textView4"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:paddingTop="5dp"
-        android:text="Class Name:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/teacher_className"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textView4"
-        android:layout_toEndOf="@+id/textView4"
-        android:layout_toRightOf="@+id/textView4"
-        android:hint="                       "
-        android:inputType="textEmailSubject" />
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:text="Class Name:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/teacher_className"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="                       "
+            android:inputType="textEmailSubject" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/teacher_createClass"
         style="@style/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Create"
+        android:layout_below="@+id/linearLayout"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/teacher_className"
-        android:text="Create" />
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

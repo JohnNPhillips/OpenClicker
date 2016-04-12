@@ -10,36 +10,41 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".student.EnrollActivity">
 
-    <TextView
-        android:id="@+id/textView4"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:paddingTop="5dp"
-        android:text="Class Code:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout">
 
-    <EditText
-        android:id="@+id/student_classCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textView4"
-        android:layout_toEndOf="@+id/textView4"
-        android:layout_toRightOf="@+id/textView4"
-        android:hint="                       "
-        android:inputType="number" />
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:text="Class Code:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/student_classCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="                       "
+            android:inputType="number" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/student_enrollClass"
         style="@style/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Enroll"
+        android:layout_below="@+id/linearLayout"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/student_classCode"
-        android:text="Enroll" />
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>
