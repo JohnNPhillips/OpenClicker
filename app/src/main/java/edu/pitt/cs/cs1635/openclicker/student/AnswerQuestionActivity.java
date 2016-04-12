@@ -77,5 +77,7 @@ public class AnswerQuestionActivity extends AppCompatActivity {
     // disable back button
     @Override
     public void onBackPressed() {
+        Toast.makeText(this,"Please wait until the question is finished.",
+                Toast.LENGTH_LONG).show();
     }
 }
