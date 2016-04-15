@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import edu.pitt.cs.cs1635.openclicker.Globals;
 import edu.pitt.cs.cs1635.openclicker.Question;
@@ -32,10 +33,12 @@ public class CreateQuestionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Question question = saveQuestion();
-                Globals.setActiveQuestion(question);
+                if (question != null) {
+                    Globals.setActiveQuestion(question);
 
-                Intent intent = new Intent(CreateQuestionActivity.this, AskQuestionActivity.class);
-                startActivity(intent);
+                    Intent intent = new Intent(CreateQuestionActivity.this, AskQuestionActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -115,10 +118,10 @@ public class CreateQuestionActivity extends AppCompatActivity {
         saveQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveQuestion();
-
-                Intent intent = new Intent(CreateQuestionActivity.this, ClassInfoActivity.class);
-                startActivity(intent);
+                if (saveQuestion() != null) {
+                    Intent intent = new Intent(CreateQuestionActivity.this, ClassInfoActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -131,11 +134,21 @@ public class CreateQuestionActivity extends AppCompatActivity {
         String ansD = ((EditText) findViewById(R.id.question_d_text)).getText().toString();
         String ansE = ((EditText) findViewById(R.id.question_e_text)).getText().toString();
 
-        int correct_ans = 0;
+        int correct_ans = -1;
         for (int i = 0; i < radios.length; i++) {
             if (radios[i].isChecked()) {
                 correct_ans = i;
             }
+        }
+
+        // Check for errors
+        if (questionTitle.isEmpty()) {
+            Toast.makeText(this, "Error: Must give the question a title", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+        if (correct_ans == -1) {
+            Toast.makeText(this, "Error: Must select a correct answer for the question", Toast.LENGTH_SHORT).show();
+            return null;
         }
 
         if (Globals.getActiveQuestion() != null) {
