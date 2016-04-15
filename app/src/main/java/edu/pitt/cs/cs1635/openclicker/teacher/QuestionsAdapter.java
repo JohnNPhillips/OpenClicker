@@ -60,7 +60,10 @@ public class QuestionsAdapter extends BaseAdapter implements ListAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Globals.setActiveQuestion(list.get(position));
 
+                Intent intent = new Intent(context, CreateQuestionActivity.class);
+                context.startActivity(intent);
             }
         });
 

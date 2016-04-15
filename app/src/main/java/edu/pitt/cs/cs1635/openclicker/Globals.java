@@ -72,7 +72,7 @@ public class Globals {
         ClassObject classExample2 = new ClassObject("HIST 2300", teacherTest);
 
         ArrayList<Question> hist1234_questions = new ArrayList<>();
-        Question q1 = new Question("What year did the civil war start?", "", "", "", "", "", 0, 8);
+        Question q1 = new Question("What year did the civil war start?", "A", "B", "C", "D", "E", 1, 8);
         Question q2 = new Question("Who was president in 1860?", "", "", "", "", "", 0, 8);
         Question q3 = new Question("Where was the last battle in the civil war?", "", "", "", "", "", 0, 8);
         hist1234_questions.add(q1);

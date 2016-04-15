@@ -26,6 +26,7 @@ public class ClassInfoActivity extends AppCompatActivity {
         createQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Globals.setActiveQuestion(null);
                 Intent intent = new Intent(ClassInfoActivity.this, CreateQuestionActivity.class);
                 startActivity(intent);
             }
