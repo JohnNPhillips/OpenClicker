@@ -4,15 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.Timer;
 import java.util.TimerTask;
-
 import edu.pitt.cs.cs1635.openclicker.Globals;
 import edu.pitt.cs.cs1635.openclicker.Question;
 import edu.pitt.cs.cs1635.openclicker.R;
@@ -22,12 +21,15 @@ public class AnswerQuestionActivity extends AppCompatActivity {
     private boolean first_run = true;
     private Timer timer;
     private Activity activity;
+    private Question question;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = this;
         setContentView(R.layout.activity_answer_question);
+
+        question = Globals.getActiveQuestion();
 
         final Button[] answers = new Button[5];
         answers[0] = (Button) findViewById(R.id.answer_a);
@@ -36,8 +38,14 @@ public class AnswerQuestionActivity extends AppCompatActivity {
         answers[3] = (Button) findViewById(R.id.answer_d);
         answers[4] = (Button) findViewById(R.id.answer_e);
 
+        TextView questionText = (TextView) findViewById(R.id.questionText);
+        questionText.setText(question.text);
+
+        String[] questionAnswers = question.getAnswers();
+
         for (int i = 0; i < answers.length; i++) {
             final Button ans_button = answers[i];
+            ans_button.setText(questionAnswers[i]);
             ans_button.setFocusableInTouchMode(true);
             ans_button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -46,6 +54,7 @@ public class AnswerQuestionActivity extends AppCompatActivity {
                         b.setBackgroundResource(R.drawable.button);
                     }
                     ans_button.requestFocus();
+                    
                 }
             });
         }

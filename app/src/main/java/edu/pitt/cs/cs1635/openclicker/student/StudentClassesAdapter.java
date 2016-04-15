@@ -22,6 +22,7 @@ import edu.pitt.cs.cs1635.openclicker.Student;
 public class StudentClassesAdapter extends BaseAdapter implements ListAdapter {
     private ArrayList<String> list = new ArrayList<String>();
     private Context context;
+    private ArrayList<ClassObject> classes;
 
     public StudentClassesAdapter(ArrayList<ClassObject> classList, Context context) {
         this.context = context;
@@ -29,6 +30,7 @@ public class StudentClassesAdapter extends BaseAdapter implements ListAdapter {
         for (ClassObject c: classList) {
             this.list.add(c.getClassName());
         }
+        classes = classList;
     }
 
     @Override
@@ -64,6 +66,12 @@ public class StudentClassesAdapter extends BaseAdapter implements ListAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(context, WaitForQuestionActivity.class);
                 context.startActivity(intent);
+                for(ClassObject c: classes) {
+                    if (list.get(position).equals(c.getClassName())) {
+                        Globals.setActiveClass(c);
+                        break;
+                    }
+                }
             }
         });
 
