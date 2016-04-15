@@ -26,11 +26,10 @@
             android:text="Q: How many states are there in the US?"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/graph0" />
+        <com.jjoe64.graphview.GraphView
+            android:layout_width="match_parent"
+            android:layout_height="400dip"
+            android:id="@+id/graph" />
 
         <TextView
             android:layout_width="wrap_content"
