@@ -45,6 +45,11 @@ public class TeacherLoginActivity extends AppCompatActivity {
 
     private void login() {
         String id = ((EditText) findViewById(R.id.idInput)).getText().toString();
+        if (id.isEmpty()) {
+            Toast.makeText(this, "Error: Teacher ID must not be blank", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (Globals.getTeacher(id) == null) {
             new AlertDialog.Builder(this)
                     .setTitle("New Teacher")

@@ -11,6 +11,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import edu.pitt.cs.cs1635.openclicker.Globals;
 import edu.pitt.cs.cs1635.openclicker.R;
@@ -44,6 +45,11 @@ public class StudentLoginActivity extends AppCompatActivity {
 
     private void login(){
         String id = ((EditText) findViewById(R.id.idInput)).getText().toString();
+        if (id.isEmpty()) {
+            Toast.makeText(this, "Error: Student ID must not be blank", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
         if(Globals.getStudent(id) == null) {
             new AlertDialog.Builder(this)
                     .setTitle("New Student")
