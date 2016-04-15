@@ -1,7 +1,7 @@
 package edu.pitt.cs.cs1635.openclicker.student;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -10,15 +10,23 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import edu.pitt.cs.cs1635.openclicker.Globals;
+import edu.pitt.cs.cs1635.openclicker.Question;
 import edu.pitt.cs.cs1635.openclicker.R;
 
 public class AnswerQuestionActivity extends AppCompatActivity {
 
     private boolean first_run = true;
+    private Timer timer;
+    private Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activity = this;
         setContentView(R.layout.activity_answer_question);
 
         final Button[] answers = new Button[5];
@@ -42,19 +50,32 @@ public class AnswerQuestionActivity extends AppCompatActivity {
             });
         }
 
-        // Countdown  timer
-        final TextView timeRemaining = (TextView)findViewById(R.id.answer_time_remaining);
-        new CountDownTimer(15000, 1000) {
-            public void onTick(long millisUntilFinished) {
-                timeRemaining.setText("Time Remaining: 00:" + String.format("%02d", millisUntilFinished / 1000));
+        final TextView timeRemainingTextView = (TextView)findViewById(R.id.answer_time_remaining);
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Question question = Globals.getActiveQuestion();
+                        int timeRemaining = question.getTimeRemaining();
+                        if (timeRemaining >= 0) {
+                            timeRemainingTextView.setText("Time Remaining: 00:" + String.format("%02d", timeRemaining));
+                        } else {
+                            Toast.makeText(activity, "You exited the application. You are not permitted to change your answer.",
+                                    Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(AnswerQuestionActivity.this, WaitForQuestionActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                        }
+                    }
+                });
             }
-
-            public void onFinish() {
-                Intent intent = new Intent(AnswerQuestionActivity.this, WaitForQuestionActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        }.start();
+        }
+                , 0 // delay
+                , 100 // milis per update
+        );
     }
 
     @Override
@@ -72,6 +93,12 @@ public class AnswerQuestionActivity extends AppCompatActivity {
             Toast.makeText(this,"You exited the application. You are not permitted to change your answer.",
                     Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        timer.cancel();
     }
 
     // disable back button

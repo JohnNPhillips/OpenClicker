@@ -61,7 +61,6 @@ public class AskQuestionActivity extends AppCompatActivity {
                             currentSlide++;
                             image.setImageResource(images[currentSlide < 8 ? currentSlide : 7]);// respect array bounds
                         } else {
-                            final TextView timeRemainingTextView = (TextView)findViewById(R.id.time_remaining);
                             timeRemainingTextView.setText("Final results");
                         }
                     }
