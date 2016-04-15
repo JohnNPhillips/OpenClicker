@@ -72,11 +72,10 @@ public class AnswerQuestionActivity extends AppCompatActivity {
                         if (timeRemaining >= 0) {
                             timeRemainingTextView.setText("Time Remaining: 00:" + String.format("%02d", timeRemaining));
                         } else {
-                            Toast.makeText(activity, "You exited the application. You are not permitted to change your answer.",
+                            Toast.makeText(activity, "Your answer was (in)correct",
                                     Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(AnswerQuestionActivity.this, WaitForQuestionActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
+                            disableButtons();
+                            timeRemainingTextView.setText("Question is over");
                         }
                     }
                 });
@@ -87,18 +86,21 @@ public class AnswerQuestionActivity extends AppCompatActivity {
         );
     }
 
+    private void disableButtons() {
+        findViewById(R.id.answer_a).setEnabled(false);
+        findViewById(R.id.answer_b).setEnabled(false);
+        findViewById(R.id.answer_c).setEnabled(false);
+        findViewById(R.id.answer_d).setEnabled(false);
+        findViewById(R.id.answer_e).setEnabled(false);
+    }
+
     @Override
     public void onResume() {
         super.onResume();
         if(first_run) {
             first_run = false;
         } else {
-            findViewById(R.id.answer_a).setEnabled(false);
-            findViewById(R.id.answer_b).setEnabled(false);
-            findViewById(R.id.answer_c).setEnabled(false);
-            findViewById(R.id.answer_d).setEnabled(false);
-            findViewById(R.id.answer_e).setEnabled(false);
-
+            disableButtons();
             Toast.makeText(this,"You exited the application. You are not permitted to change your answer.",
                     Toast.LENGTH_LONG).show();
         }
@@ -108,12 +110,5 @@ public class AnswerQuestionActivity extends AppCompatActivity {
     public void onStop() {
         super.onStop();
         timer.cancel();
-    }
-
-    // disable back button
-    @Override
-    public void onBackPressed() {
-        Toast.makeText(this,"Please wait until the question is finished.",
-                Toast.LENGTH_LONG).show();
     }
 }
