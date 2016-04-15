@@ -1,10 +1,13 @@
 package edu.pitt.cs.cs1635.openclicker.teacher;
 
-import android.os.CountDownTimer;
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import edu.pitt.cs.cs1635.openclicker.Globals;
 import edu.pitt.cs.cs1635.openclicker.Question;
@@ -12,22 +15,23 @@ import edu.pitt.cs.cs1635.openclicker.R;
 
 public class AskQuestionActivity extends AppCompatActivity {
 
-    CountDownTimer timer;
+    Timer timer;
     ImageView image;
     TextView questionTextView;
-    int currentSlide, seconds;
+    int currentSlide;
     int[] images;
+    private Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ask_question);
+        activity = this;
         image = (ImageView) findViewById(R.id.imageView1);
         questionTextView = (TextView) findViewById(R.id.questionTLabel);
 
         Question question = Globals.getActiveQuestion();
         questionTextView.setText(question.text);
-        seconds = question.seconds;
 
         images = new int[8];
         images[0] = R.drawable.graph0;
@@ -42,24 +46,39 @@ public class AskQuestionActivity extends AppCompatActivity {
         currentSlide = 1;
         image.setImageResource(images[0]);
 
-        final TextView timeRemaining = (TextView)findViewById(R.id.time_remaining);
-        timer = new CountDownTimer(seconds * 1000, 1000) {
-            public void onTick(long millisUntilFinished) {
-                if(millisUntilFinished < 1000f * (seconds - currentSlide)) image.setImageResource(images[currentSlide++]);
-                timeRemaining.setText("Time Remaining: 00:" + String.format("%02d", millisUntilFinished / 1000));
+        final TextView timeRemainingTextView = (TextView)findViewById(R.id.time_remaining);
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Question question = Globals.getActiveQuestion();
+                        int timeRemaining = question.getTimeRemaining();
+                        if (timeRemaining > 0) {
+                            timeRemainingTextView.setText("Time Remaining: 00:" + String.format("%02d", timeRemaining));
+                            currentSlide++;
+                            image.setImageResource(images[currentSlide < 8 ? currentSlide : 7]);// respect array bounds
+                        } else {
+                            final TextView timeRemainingTextView = (TextView)findViewById(R.id.time_remaining);
+                            timeRemainingTextView.setText("Final results");
+                        }
+                    }
+                });
             }
+        }
+            , 0 // delay
+            , 900 // milis per update
+        );
 
-            public void onFinish() {
-                timeRemaining.setText("Final results");
-            }
-        }.start();
+        question.start();
     }
 
     @Override
     public void onStop()
     {
         super.onStop();
-
         timer.cancel();
     }
 }
