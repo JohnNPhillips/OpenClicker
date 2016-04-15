@@ -46,15 +46,20 @@ public class AnswerQuestionActivity extends AppCompatActivity {
         for (int i = 0; i < answers.length; i++) {
             final Button ans_button = answers[i];
             ans_button.setText(questionAnswers[i]);
-            ans_button.setFocusableInTouchMode(true);
+            //ans_button.setFocusableInTouchMode(true);
             ans_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     for (Button b : answers) {
-                        b.setBackgroundResource(R.drawable.button);
+                        b.setBackgroundResource(R.drawable.button_enabled);
                     }
-                    ans_button.requestFocus();
-                    
+                    //ans_button.requestFocus();
+                    for (int j = 0; j < 5; j++) {
+                        if (ans_button.getText().equals(answers[j].getText())) {
+                            question.setStudentAnswer(Globals.getActiveStudent(), j);
+                        }
+                    }
+                    ans_button.setBackgroundResource(R.drawable.button_pressed);
                 }
             });
         }
@@ -72,10 +77,19 @@ public class AnswerQuestionActivity extends AppCompatActivity {
                         if (timeRemaining >= 0) {
                             timeRemainingTextView.setText("Time Remaining: 00:" + String.format("%02d", timeRemaining));
                         } else {
-                            Toast.makeText(activity, "Your answer was (in)correct",
-                                    Toast.LENGTH_LONG).show();
+                            if(question.correct == question.getStudentAnswer(Globals.getActiveStudent()))
+                            {
+                                Toast.makeText(activity, "Your answer was correct",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                            else
+                            {
+                                Toast.makeText(activity, "Your answer was incorrect",
+                                        Toast.LENGTH_LONG).show();
+                            }
                             disableButtons();
                             timeRemainingTextView.setText("Question is over");
+                            timer.cancel();
                         }
                     }
                 });
