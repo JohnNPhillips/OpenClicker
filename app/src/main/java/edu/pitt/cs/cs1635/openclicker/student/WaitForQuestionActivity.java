@@ -42,15 +42,6 @@ public class WaitForQuestionActivity extends AppCompatActivity {
                 }
             }
         }, 0, 100);
-
-        ProgressBar waitingCircle = (ProgressBar)findViewById(R.id.progressBar);
-        waitingCircle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(WaitForQuestionActivity.this, AnswerQuestionActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override
