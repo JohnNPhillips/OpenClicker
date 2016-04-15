@@ -1,6 +1,7 @@
 package edu.pitt.cs.cs1635.openclicker;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by lukekljucaric on 3/30/16.
@@ -11,6 +12,8 @@ public class ClassObject {
     private ArrayList<Student> students;
     private ArrayList<Question> questions;
     private String code;
+    private Random rn;
+
 
     public ClassObject(String n, Teacher t)
     {
@@ -19,9 +22,12 @@ public class ClassObject {
 
     public ClassObject(String n, Teacher t, ArrayList<Question> q)
     {
+        int randomInt;
         name = n;
         teacher = t;
-        code = (Math.abs(name.hashCode() % 900000) + 100000) + "";
+        rn = new Random();
+        randomInt = rn.nextInt(100000+1);
+        code = (Math.abs(name.hashCode() % 900000) + 100000 + randomInt) + "";
         students = new ArrayList<>();
         if(q == null) questions = new ArrayList<>();
         else questions = q;
