@@ -77,7 +77,13 @@ public class AnswerQuestionActivity extends AppCompatActivity {
                         if (timeRemaining >= 0) {
                             timeRemainingTextView.setText("Time Remaining: 00:" + String.format("%02d", timeRemaining));
                         } else {
-                            if(question.correct == question.getStudentAnswer(Globals.getActiveStudent().getId()))
+                            Integer answer = question.getStudentAnswer(Globals.getActiveStudent().getId());
+                            if (answer == null)
+                            {
+                                Toast.makeText(activity, "You did not select an answer",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                            else if (question.correct == answer)
                             {
                                 Toast.makeText(activity, "Your answer was correct",
                                         Toast.LENGTH_LONG).show();
