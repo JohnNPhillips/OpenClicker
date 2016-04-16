@@ -47,7 +47,6 @@
         <activity
             android:name=".teacher.CreateQuestionActivity"
             android:parentActivityName=".teacher.ClassInfoActivity"
-            android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize" />
         <activity
             android:name=".teacher.AskQuestionActivity"
