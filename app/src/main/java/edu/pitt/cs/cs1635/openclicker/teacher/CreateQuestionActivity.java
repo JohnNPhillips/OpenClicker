@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import edu.pitt.cs.cs1635.openclicker.Globals;
 import edu.pitt.cs.cs1635.openclicker.Question;
 import edu.pitt.cs.cs1635.openclicker.R;
 import edu.pitt.cs.cs1635.openclicker.Teacher;
+import edu.pitt.cs.cs1635.openclicker.student.StudentQuestionsAdapter;
 
 public class CreateQuestionActivity extends AppCompatActivity {
 
@@ -111,6 +113,10 @@ public class CreateQuestionActivity extends AppCompatActivity {
             radios[editQ.correct].callOnClick();
 
             timeBar.setProgress(editQ.seconds);
+
+            StudentAnswerAdapter adapter = new StudentAnswerAdapter(editQ, this);
+            ListView studentAnswerList = (ListView)findViewById(R.id.studentsGradeLV);
+            studentAnswerList.setAdapter(adapter);
         }
 
         // Save question functionality

@@ -1,6 +1,8 @@
 package edu.pitt.cs.cs1635.openclicker;
 import java.util.Date;
 import java.util.Hashtable;
+import java.util.Set;
+import java.util.Map;
 
 public class Question {
     public String text;
@@ -48,5 +50,10 @@ public class Question {
         }
 
         return null;
+    }
+
+    public Set<Map.Entry<String, Integer>> getStudentsAnswers()
+    {
+        return studentAnswers.entrySet();
     }
 }
