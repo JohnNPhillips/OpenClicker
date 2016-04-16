@@ -8,7 +8,7 @@ public class Question {
     public int correct;
     public int seconds;
     private long startTime;
-    private Hashtable<Student, Integer> studentAnswers = new Hashtable<Student, Integer>();
+    private Hashtable<String, Integer> studentAnswers = new Hashtable<String, Integer>();
 
     public Question(String text, String[] answers, int correct, int seconds) {
         this.text = text;
@@ -35,12 +35,12 @@ public class Question {
         return (int) (seconds - elapsed / 1000);
     }
 
-    public void setStudentAnswer(Student s, Integer answer)
+    public void setStudentAnswer(String s, Integer answer)
     {
         studentAnswers.put(s, answer);
     }
 
-    public Integer getStudentAnswer(Student s)
+    public Integer getStudentAnswer(String s)
     {
         if(studentAnswers.containsKey(s))
         {

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import java.util.Timer;
@@ -42,6 +43,10 @@ public class WaitForQuestionActivity extends AppCompatActivity {
                 }
             }
         }, 0, 100);
+
+        StudentQuestionsAdapter adapter = new StudentQuestionsAdapter(currentClass.getQuestions(), this);
+        ListView questionList = (ListView)findViewById(R.id.listViewQuestions);
+        questionList.setAdapter(adapter);
     }
 
     @Override

@@ -56,7 +56,7 @@ public class AnswerQuestionActivity extends AppCompatActivity {
                     //ans_button.requestFocus();
                     for (int j = 0; j < 5; j++) {
                         if (ans_button.getText().equals(answers[j].getText())) {
-                            question.setStudentAnswer(Globals.getActiveStudent(), j);
+                            question.setStudentAnswer(Globals.getActiveStudent().getId(), j);
                         }
                     }
                     ans_button.setBackgroundResource(R.drawable.button_pressed);
@@ -77,7 +77,7 @@ public class AnswerQuestionActivity extends AppCompatActivity {
                         if (timeRemaining >= 0) {
                             timeRemainingTextView.setText("Time Remaining: 00:" + String.format("%02d", timeRemaining));
                         } else {
-                            if(question.correct == question.getStudentAnswer(Globals.getActiveStudent()))
+                            if(question.correct == question.getStudentAnswer(Globals.getActiveStudent().getId()))
                             {
                                 Toast.makeText(activity, "Your answer was correct",
                                         Toast.LENGTH_LONG).show();
