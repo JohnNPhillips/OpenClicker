@@ -1,5 +1,6 @@
 package edu.pitt.cs.cs1635.openclicker.teacher;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +31,8 @@ public class CreateQuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_question);
 
+        final Context context = this;
+
         Button askQuestion = (Button) findViewById(R.id.teacher_start_question);
         askQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,6 +40,10 @@ public class CreateQuestionActivity extends AppCompatActivity {
                 Question question = saveQuestion();
                 if (question != null) {
                     Globals.setActiveQuestion(question);
+
+                    // Send a notification to the "student" (DEMO ONLY)
+                    Globals.setActiveStudent(Globals.getStudent("100"));
+                    question.notifyCurrentStudent(context);
 
                     Intent intent = new Intent(CreateQuestionActivity.this, AskQuestionActivity.class);
                     startActivity(intent);

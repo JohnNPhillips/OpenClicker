@@ -84,6 +84,7 @@ public class AskQuestionActivity extends AppCompatActivity {
     public void onStop() {
         super.onStop();
         timer.cancel();
+        timer.purge();
     }
 
     private void updateGraph() {

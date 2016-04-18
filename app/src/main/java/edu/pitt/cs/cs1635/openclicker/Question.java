@@ -1,8 +1,17 @@
 package edu.pitt.cs.cs1635.openclicker;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
+
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.Set;
 import java.util.Map;
+
+import edu.pitt.cs.cs1635.openclicker.student.AnswerQuestionActivity;
 
 public class Question {
     public String text;
@@ -59,5 +68,31 @@ public class Question {
     public Set<Map.Entry<String, Integer>> getStudentsAnswers()
     {
         return studentAnswers.entrySet();
+    }
+
+    public void notifyCurrentStudent(Context context) {
+        // Build notification
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
+        mBuilder.setSmallIcon(R.drawable.button);
+        mBuilder.setContentTitle("OpenClicker");
+        mBuilder.setContentText(text);
+        mBuilder.setAutoCancel(true);
+
+        // Add action to be performed when notification is clicked
+        Intent resultIntent = new Intent(context, AnswerQuestionActivity.class);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+        stackBuilder.addParentStack(AnswerQuestionActivity.class);
+
+        // Adds the Intent that starts the Activity to the top of the stack
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
+        mBuilder.setContentIntent(resultPendingIntent);
+
+        // Issue notification (this only sends a notification to the demo student;
+        //   in reality we would send it to all the students in the class)
+        int notificationId = 100; // this could be the same as the student id
+        NotificationManager mNotificationManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.notify(notificationId, mBuilder.build());
     }
 }

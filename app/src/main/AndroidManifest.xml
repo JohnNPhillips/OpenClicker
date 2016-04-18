@@ -23,7 +23,9 @@
             android:parentActivityName=".student.StudentLoginActivity" />
         <activity
             android:name=".student.WaitForQuestionActivity"
-            android:parentActivityName=".student.StudentClassListActivity" />
+            android:parentActivityName=".student.StudentClassListActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".student.AnswerQuestionActivity"
             android:parentActivityName=".student.StudentClassListActivity"
