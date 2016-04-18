@@ -32,6 +32,10 @@ public class Question {
         return answers;
     }
 
+    public boolean hasBeenAsked() {
+        return startTime != 0;
+    }
+
     public int getTimeRemaining() {
         long elapsed = new Date().getTime() - startTime;
         return (int) (seconds - elapsed / 1000);
@@ -42,14 +46,14 @@ public class Question {
         studentAnswers.put(s, answer);
     }
 
-    public Integer getStudentAnswer(String s)
+    public int getStudentAnswer(String s)
     {
         if(studentAnswers.containsKey(s))
         {
             return studentAnswers.get(s);
         }
 
-        return null;
+        return -1;
     }
 
     public Set<Map.Entry<String, Integer>> getStudentsAnswers()

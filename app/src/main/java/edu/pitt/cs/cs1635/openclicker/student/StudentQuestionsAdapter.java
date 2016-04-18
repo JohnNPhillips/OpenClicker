@@ -30,7 +30,7 @@ public class StudentQuestionsAdapter extends BaseAdapter implements ListAdapter 
         context = c;
         for (Question q : questionList)
         {
-            if(q.getStudentAnswer(Globals.getActiveStudent().getId()) != null)
+            if (q.hasBeenAsked())
             {
                 list.add(q.text);
             }
