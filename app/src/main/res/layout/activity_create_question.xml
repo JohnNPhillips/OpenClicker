@@ -206,11 +206,20 @@
                     android:layout_gravity="center_horizontal"
                     android:text="seconds" />
 
+                <TextView
+                    android:id="@+id/titleLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/secondsLabel"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="8dp"
+                    android:text="Student Results" />
+
                 <ListView
                     android:id="@+id/studentsGradeLV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/secondsLabel"
+                    android:layout_below="@+id/titleLabel"
                     android:layout_centerHorizontal="true" />
             </RelativeLayout>
 
