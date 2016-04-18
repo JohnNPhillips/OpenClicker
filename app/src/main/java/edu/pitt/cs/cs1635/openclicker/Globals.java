@@ -72,15 +72,18 @@ public class Globals {
         ClassObject classExample2 = new ClassObject("HIST 2300", teacherTest);
 
         ArrayList<Question> hist1234_questions = new ArrayList<>();
-        Question q1 = new Question("What year did the civil war start?", "A", "B", "C", "D", "E", 1, 8);
-        Question q2 = new Question("Who was president in 1860?", "", "", "", "", "", 0, 8);
-        Question q3 = new Question("Where was the last battle in the civil war?", "", "", "", "", "", 0, 8);
+        Question q1 = new Question("What year did the civil war start?", "14 BC", "1066", "1860", "1861", "1865", 3, 10);
+        Question q2 = new Question("Who was president in 1925?", "Woodrow Wilson", "Calvin Coolidge", "Herbert Hoover", "Bernie Sanders", "Donald Trump", 1, 10);
+        Question q3 = new Question("Who was president on D-Day?", "Abraham Lincoln", "Woodrow Wilson", "JFK", "LBJ", "FDR", 4, 12);
+        Question q4 = new Question("Who was George W Bush's Vice President?", "Dick Cheney", "Barack Obama", "Joe Biden", "Al Gore", "Hillary Clinton", 0, 15);
         hist1234_questions.add(q1);
         hist1234_questions.add(q2);
         hist1234_questions.add(q3);
+        hist1234_questions.add(q4);
         classExample.addQuestion(q1);
         classExample.addQuestion(q2);
         classExample.addQuestion(q3);
+        classExample.addQuestion(q4);
         teacherTest.addClass(classExample);
         teacherTest.addClass(classExample2);
         teachers.put(teacherTest.getId(), teacherTest);
