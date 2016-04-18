@@ -10,6 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 import edu.pitt.cs.cs1635.openclicker.Globals;
@@ -18,10 +23,11 @@ import edu.pitt.cs.cs1635.openclicker.R;
 
 public class AnswerQuestionActivity extends AppCompatActivity {
 
-    private boolean first_run = true;
     private Timer timer;
     private Activity activity;
     private Question question;
+
+    private Set<Question> viewedQuestions = new HashSet<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +70,15 @@ public class AnswerQuestionActivity extends AppCompatActivity {
             });
         }
 
+        createTimer();
+    }
+
+    private void createTimer() {
+        if (timer != null) {
+            timer.cancel();
+            timer.purge();
+        }
+
         final TextView timeRemainingTextView = (TextView)findViewById(R.id.answer_time_remaining);
         timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -96,6 +111,7 @@ public class AnswerQuestionActivity extends AppCompatActivity {
                             disableButtons();
                             timeRemainingTextView.setText("Question is over");
                             timer.cancel();
+                            timer.purge();
                         }
                     }
                 });
@@ -105,7 +121,6 @@ public class AnswerQuestionActivity extends AppCompatActivity {
                 , 100 // milis per update
         );
     }
-
     private void disableButtons() {
         findViewById(R.id.answer_a).setEnabled(false);
         findViewById(R.id.answer_b).setEnabled(false);
@@ -117,18 +132,23 @@ public class AnswerQuestionActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        if(first_run) {
-            first_run = false;
-        } else {
-            disableButtons();
-            Toast.makeText(this,"You exited the application. You are not permitted to change your answer.",
-                    Toast.LENGTH_LONG).show();
+
+        if (viewedQuestions.contains(question) && question.getTimeRemaining() > 0) {
+                disableButtons();
+                Toast.makeText(this, "You exited the application. You are not permitted to change your answer.",
+                        Toast.LENGTH_LONG).show();
+
+                createTimer();
         }
+
+        viewedQuestions.add(question);
     }
 
     @Override
     public void onStop() {
         super.onStop();
+
         timer.cancel();
+        timer.purge();
     }
 }
