@@ -44,6 +44,13 @@ public class AnswerQuestionActivity extends AppCompatActivity {
         answers[3] = (Button) findViewById(R.id.answer_d);
         answers[4] = (Button) findViewById(R.id.answer_e);
 
+        final TextView[] tvAnswers = new TextView[5];
+        tvAnswers[0] = (TextView) findViewById(R.id.textView_a);
+        tvAnswers[1] = (TextView) findViewById(R.id.textView_b);
+        tvAnswers[2] = (TextView) findViewById(R.id.textView_c);
+        tvAnswers[3] = (TextView) findViewById(R.id.textView_d);
+        tvAnswers[4] = (TextView) findViewById(R.id.textView_e);
+
         TextView questionText = (TextView) findViewById(R.id.questionText);
         questionText.setText(question.text);
 
@@ -51,7 +58,8 @@ public class AnswerQuestionActivity extends AppCompatActivity {
 
         for (int i = 0; i < answers.length; i++) {
             final Button ans_button = answers[i];
-            ans_button.setText(questionAnswers[i]);
+            final TextView ans_text = tvAnswers[i];
+            ans_text.setText(questionAnswers[i]);
             //ans_button.setFocusableInTouchMode(true);
             ans_button.setOnClickListener(new View.OnClickListener() {
                 @Override
