@@ -47,6 +47,7 @@ public class WaitForQuestionActivity extends AppCompatActivity {
         StudentQuestionsAdapter adapter = new StudentQuestionsAdapter(currentClass.getQuestions(), this);
         ListView questionList = (ListView)findViewById(R.id.listViewQuestions);
         questionList.setAdapter(adapter);
+        setTitle(Globals.getActiveClass().getClassName());
     }
 
     @Override

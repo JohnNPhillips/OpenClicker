@@ -50,6 +50,6 @@ public class TeacherClassListActivity extends AppCompatActivity {
         TeacherClassesAdapter adapter = new TeacherClassesAdapter(teacher.getClassList(), this);
         ListView class_list = (ListView) findViewById(R.id.teacher_class_list);
         class_list.setAdapter(adapter);
-
+        setTitle("Class List");
     }
 }

@@ -41,6 +41,7 @@ public class TeacherLoginActivity extends AppCompatActivity {
                 return false;
             }
         });
+        setTitle("Teacher Login");
     }
 
     private void login() {

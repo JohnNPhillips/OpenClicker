@@ -137,6 +137,7 @@ public class CreateQuestionActivity extends AppCompatActivity {
                 }
             }
         });
+        setTitle(Globals.getActiveClass().getClassName());
     }
 
     private Question saveQuestion() {

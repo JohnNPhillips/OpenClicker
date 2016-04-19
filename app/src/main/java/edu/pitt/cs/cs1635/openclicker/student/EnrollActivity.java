@@ -40,6 +40,7 @@ public class EnrollActivity extends AppCompatActivity {
                 return false;
             }
         });
+        setTitle("Add Class");
     }
 
     private void enroll() {

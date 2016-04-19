@@ -70,6 +70,7 @@ public class AnswerQuestionActivity extends AppCompatActivity {
             });
         }
 
+        setTitle(Globals.getActiveClass().getClassName());
         createTimer();
     }
 

@@ -34,5 +34,6 @@ public class StudentClassListActivity extends AppCompatActivity {
         StudentClassesAdapter adapter = new StudentClassesAdapter(student.getClassList(), this);
         ListView class_list = (ListView)findViewById(R.id.student_class_list);
         class_list.setAdapter(adapter);
+        setTitle("Class List");
     }
 }

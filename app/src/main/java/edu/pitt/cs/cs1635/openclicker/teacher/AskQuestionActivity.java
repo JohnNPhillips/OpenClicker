@@ -78,6 +78,7 @@ public class AskQuestionActivity extends AppCompatActivity {
         );
 
         question.start();
+        setTitle("Question Results");
     }
 
     @Override

@@ -38,5 +38,7 @@ public class ClassInfoActivity extends AppCompatActivity {
 
         TextView classCode = (TextView) findViewById(R.id.teacher_class_code);
         classCode.setText("Class Code: " + classObj.getClassCode());
+
+        setTitle(Globals.getActiveClass().getClassName());
     }
 }

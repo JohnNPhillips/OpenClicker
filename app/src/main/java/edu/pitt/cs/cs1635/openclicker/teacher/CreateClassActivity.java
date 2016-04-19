@@ -39,6 +39,7 @@ public class CreateClassActivity extends AppCompatActivity {
                 return false;
             }
         });
+        setTitle("Create a class");
     }
 
     private void createClass() {

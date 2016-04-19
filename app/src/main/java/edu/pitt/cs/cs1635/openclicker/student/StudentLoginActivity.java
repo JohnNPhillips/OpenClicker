@@ -41,6 +41,7 @@ public class StudentLoginActivity extends AppCompatActivity {
                 return false;
             }
         });
+        setTitle("Student Login");
     }
 
     private void login(){
